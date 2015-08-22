@@ -7,7 +7,8 @@ var User = new keystone.List('User');
 User.add({
 	name: { type: Types.Name, required: true, index: true },
 	email: { type: Types.Email, initial: true, required: true, index: true, unique: true },
-	password: { type: Types.Password, initial: true }
+	password: { type: Types.Password, initial: true },
+	company: { type: Types.Relationship, ref: 'Company', initial: true, index: true }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
 });
@@ -19,5 +20,5 @@ User.schema.virtual('canAccessKeystone').get(function() {
 
 transform.toJSON(User);
 
-User.defaultColumns = 'name, email, isAdmin';
+User.defaultColumns = 'name, email, company, isAdmin';
 User.register();
