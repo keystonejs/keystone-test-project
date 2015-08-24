@@ -7,7 +7,7 @@ var Company = new keystone.List('Company', {
 });
 
 Company.add({
-	name: { type: Types.Name, required: true, index: true },
+	name: { type: String, required: true, index: true },
 	website: { type: Types.Url, index: true },
 	github: { type: String, size: 'small', index: true },
 	twitter: { type: Types.Password, size: 'small', index: true }
