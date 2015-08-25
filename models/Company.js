@@ -10,7 +10,7 @@ Company.add({
 	name: { type: String, required: true, index: true },
 	website: { type: Types.Url, index: true },
 	github: { type: String, size: 'small', index: true },
-	twitter: { type: Types.Password, size: 'small', index: true }
+	twitter: { type: String, size: 'small', index: true }
 });
 
 transform.toJSON(Company);
