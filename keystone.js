@@ -30,8 +30,8 @@ keystone.set('locals', {
 
 keystone.set('routes', require('./routes'));
 keystone.set('nav', {
-	'users': 'users',
-	'companies': 'companies'
+	'users': ['users', 'companies'],
+	'content': ['posts', 'post-categories']
 });
 
 keystone.start();
