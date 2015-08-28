@@ -25,7 +25,7 @@ var App = React.createClass({
 						</FormField>
 					</Form>
 					<hr />
-					<Button ref="btn" type="primary" onClick={this.gotoKeystone} block>Open KeystoneJS</Button>
+					<Button ref="btn" type="primary" onClick={this.gotoKeystone} block>Got it, let's begin</Button>
 				</div>
 			</div>
 		);
