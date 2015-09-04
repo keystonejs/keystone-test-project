@@ -8,7 +8,7 @@ Contact.add({
 	name: { type: Types.Name, required: true, index: true },
 	email: { type: Types.Email, initial: true, index: true, unique: true },
 	favouriteFlavour: { type: Types.Select, options: 'chocolate, vanilla, strawberry', index: true },
-	birthday: { type: Date, index: true },
+	birthday: { type: Types.Date, index: true },
 	homepage: { type: Types.Url, index: true },
 	favouriteWords: { type: Types.TextArray, index: true },
 	favouriteNumbers: { type: Types.TextArray, index: true },
