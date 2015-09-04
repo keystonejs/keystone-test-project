@@ -7,7 +7,7 @@
     "babel-plugin-object-assign": "^1.2.1",
     "babelify": "^6.1.3",
     "browserify-middleware": "^7.0.0",
-    "elemental": "^0.3.4",
+    "elemental": "^0.4.2",
     "keystone": "https://github.com/keystonejs/keystone.git",
     "model-transform": "^1.1.0",
     "react": "^0.13.3",
