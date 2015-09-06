@@ -21,7 +21,7 @@ function randomBoolean () {
 Autocreate.add({
 	text: { type: String, index: true, default: randomkey.bind(null, [10,20]) },
 	number: { type: Number, index: true, default: randomNumber },
-	boolean: { type: Date, index: true, default: randomBoolean },
+	boolean: { type: Boolean, index: true, default: randomBoolean },
 	datetime: { type: Date, index: true, default: Date.now },
 	html: { type: String, index: true, default: lipsum },
 	markdown: { type: String, index: true, default: lipsum }
