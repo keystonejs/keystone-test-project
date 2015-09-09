@@ -23,7 +23,7 @@ Autocreate.add({
 	number: { type: Number, index: true, default: randomNumber },
 	boolean: { type: Boolean, index: true, default: randomBoolean },
 	datetime: { type: Date, index: true, default: Date.now },
-	html: { type: String, index: true, default: lipsum },
+	html: { type: String, default: lipsum.bind(null, { count: 2, units: 'paragraphs' }) },
 	markdown: { type: String, index: true, default: lipsum }
 });
 
