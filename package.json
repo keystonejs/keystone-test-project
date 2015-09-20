@@ -20,7 +20,8 @@
     "npm": ">=2.14.2"
   },
   "scripts": {
-    "start": "node keystone.js"
+    "start": "node keystone.js",
+    "dev": "KEYSTONE_DEV=true node keystone.js"
   },
   "main": "keystone.js"
 }
