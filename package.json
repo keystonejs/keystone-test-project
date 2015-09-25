@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "node keystone.js",
-    "dev": "KEYSTONE_DEV=true node keystone.js"
+    "dev": "KEYSTONE_DEV=true node keystone.js",
+    "dev_windows": "set KEYSTONE_DEV=true&&node keystone.js"
   },
   "main": "keystone.js"
 }
