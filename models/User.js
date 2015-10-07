@@ -8,7 +8,8 @@ User.add({
 	name: { type: Types.Name, required: true, index: true },
 	email: { type: Types.Email, initial: true, required: true, index: true, unique: true },
 	password: { type: Types.Password, initial: true },
-	company: { type: Types.Relationship, ref: 'Company', initial: true, index: true }
+	company: { type: Types.Relationship, ref: 'Company', initial: true, index: true },
+	address: { type: Types.Location, collapse: true }
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	isProtected: { type: Boolean, noedit: true }
