@@ -32,6 +32,5 @@ Autocreate.add({
 });
 
 transform.toJSON(Autocreate);
-
 Autocreate.defaultColumns = 'text, number, boolean, datetime';
 Autocreate.register();

@@ -38,9 +38,6 @@ User.schema.path('password').set(value => {
 	return (this.isProtected) ? '$2a$10$8oUbHJPIUrW5z2aHoIGfP.q0SC5DrLDrX1qLkwhjQ3nYQ9Ay2nGPu' : value;
 });
 
-// Apply the standard toJSON transformation
 transform.toJSON(User);
-
-// Register the User List
 User.defaultColumns = 'name, email, company, isAdmin';
 User.register();

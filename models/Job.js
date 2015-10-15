@@ -41,5 +41,6 @@ Job.add('Description', {
 	},
 });
 
+transform.toJSON(Job);
 Job.defaultColumns = 'name, jobState|15%, jobType|15%, jobRole|15%';
 Job.register();

@@ -36,5 +36,6 @@ Event.add('Description', {
 	schedule: { type: Types.Html, wysiwyg: true, collapse: true },
 });
 
+transform.toJSON(Event);
 Event.defaultColumns = 'name, eventType|15%, eventState|15%, startDate|15%';
 Event.register();

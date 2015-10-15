@@ -57,5 +57,6 @@ FieldTest.add('Needs Configuration', {
 	// S3File:            { type: Types.S3File, label: 'S3 File' },
 });
 
+transform.toJSON(FieldTest);
 FieldTest.defaultColumns = 'name, boolean, date, number, password';
 FieldTest.register();

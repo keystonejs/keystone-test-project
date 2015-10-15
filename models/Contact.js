@@ -17,6 +17,5 @@ Contact.add({
 });
 
 transform.toJSON(Contact);
-
 Contact.defaultColumns = 'name, email, favouriteFlavour, birthday, homepage';
 Contact.register();

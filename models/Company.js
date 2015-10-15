@@ -16,6 +16,5 @@ Company.add({
 Company.relationship({ ref: 'User', path: 'users' });
 
 transform.toJSON(Company);
-
 Company.defaultColumns = 'name, website, github, twitter';
 Company.register();

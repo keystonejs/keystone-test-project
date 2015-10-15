@@ -12,4 +12,5 @@ PostCategory.add({
 
 PostCategory.relationship({ ref: 'Post', path: 'categories' });
 
+transform.toJSON(PostCategory);
 PostCategory.register();
