@@ -9,14 +9,14 @@ User.add({
 	email: { type: Types.Email, initial: true, required: true, index: true, unique: true },
 	password: { type: Types.Password, initial: true },
 	company: { type: Types.Relationship, ref: 'Company', initial: true, index: true },
-	address: { type: Types.Location, collapse: true }
+	address: { type: Types.Location, collapse: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
-	isProtected: { type: Boolean, noedit: true }
+	isProtected: { type: Boolean, noedit: true },
 });
 
 // Provide access to Keystone
-User.schema.virtual('canAccessKeystone').get(function() {
+User.schema.virtual('canAccessKeystone').get(() => {
 	return this.isAdmin;
 });
 
@@ -27,14 +27,14 @@ User.schema.virtual('canAccessKeystone').get(function() {
  */
 
 var protect = function(path) {
-	User.schema.path(path).set(function(value) {
+	User.schema.path(path).set(value => {
 		return (this.isProtected) ? this.get(path) : value;
 	});
-}
+};
 var protectedPaths = ['name.first', 'name.last', 'email', 'isAdmin'];
 protectedPaths.forEach(protect);
 
-User.schema.path('password').set(function(value) {
+User.schema.path('password').set(value => {
 	return (this.isProtected) ? '$2a$10$8oUbHJPIUrW5z2aHoIGfP.q0SC5DrLDrX1qLkwhjQ3nYQ9Ay2nGPu' : value;
 });
 

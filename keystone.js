@@ -24,14 +24,14 @@ keystone.init({
 keystone.import('models');
 
 keystone.set('locals', {
-	env: keystone.get('env')
+	env: keystone.get('env'),
 });
 
 keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	'people': ['users', 'companies', 'contacts'],
-	'content': ['posts', 'post-categories'],
-	'test-schemas': ['autocreates', 'field-tests']
+	'content': ['posts', 'post-categories', 'events', 'jobs'],
+	'test-schemas': ['autocreates', 'field-tests'],
 });
 
 keystone.start();

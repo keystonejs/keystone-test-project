@@ -41,7 +41,7 @@ var styles = {
 		margin: '6vh auto',
 		maxWidth: 480,
 		padding: '3em',
-	}
+	},
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -1,13 +1,14 @@
-const keystone = require('keystone');
-const Types = keystone.Field.Types;
+var keystone = require('keystone');
+var transform = require('model-transform');
+var Types = keystone.Field.Types;
 
 var Job = new keystone.List('Job', {
 	autokey: { from: 'name', path: 'key', unique: true },
-	track: true
+	track: true,
 });
 
 Job.set('notes', {
-	isFeatured: 'Featured jobs are displayed first on the home page'
+	isFeatured: 'Featured jobs are displayed first on the home page',
 });
 
 Job.add({
@@ -25,7 +26,7 @@ Job.add('Contact Information', {
 	phone: { type: String, width: 'short' },
 	phoneViews: { type: Types.Number },
 	website: { type: Types.Url, collapse: true },
-	location: { type: Types.Location, collapse: true }
+	location: { type: Types.Location, collapse: true },
 });
 
 Job.add('Description', {
@@ -36,8 +37,8 @@ Job.add('Description', {
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		summary: { type: Types.Html, hidden: true },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 }
-	}
+		extended: { type: Types.Html, wysiwyg: true, height: 400 },
+	},
 });
 
 Job.defaultColumns = 'name, jobState|15%, jobType|15%, jobRole|15%';

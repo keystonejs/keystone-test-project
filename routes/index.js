@@ -9,8 +9,8 @@ exports = module.exports = function(app) {
 
 	app.use('/js', browserify('./client/scripts', {
 		transform: [babelify.configure({
-			plugins: ['object-assign']
-		})]
+			plugins: ['object-assign'],
+		})],
 	}));
 
 	// Views

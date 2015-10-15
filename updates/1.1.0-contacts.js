@@ -1299,6 +1299,6 @@ exports.create = {
 			"name.first": "Geoffrey",
 			"name.last": "Ward",
 			"email": "metus.in@amet.net"
-		}
-	]
+		},
+	],
 };

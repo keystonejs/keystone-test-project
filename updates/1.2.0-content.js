@@ -4,6 +4,6 @@ exports.create = {
 		{ name: 'Ideas' },
 		{ name: 'Node.js' },
 		{ name: 'React.js' },
-		{ name: 'Other' }
-	]
+		{ name: 'Other' },
+	],
 };

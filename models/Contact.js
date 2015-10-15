@@ -13,7 +13,7 @@ Contact.add({
 	favouriteWords: { type: Types.TextArray, index: true },
 	favouriteNumbers: { type: Types.TextArray, index: true },
 	address: { type: Types.Location, collapse: true },
-	bio: { type: Types.Markdown, collapse: true }
+	bio: { type: Types.Markdown, collapse: true },
 });
 
 transform.toJSON(Contact);

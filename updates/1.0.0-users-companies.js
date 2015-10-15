@@ -108,6 +108,6 @@ exports.create = {
 			"name": 'Microsoft',
 			"website": 'http://www.microsoft.com',
 			"twitter": '@microsoft'
-		}
-	]
+		},
+	],
 };

@@ -1,12 +1,13 @@
-var keystone = require('keystone'),
-	Types = keystone.Field.Types;
+var keystone = require('keystone');
+var transform = require('model-transform');
+var Types = keystone.Field.Types;
 
 var FieldTest = new keystone.List('FieldTest', {
-	track: true
+	track: true,
 });
 
 FieldTest.add({
-	longLabelForHeadingTesting: { type: String }
+	longLabelForHeadingTesting: String,
 });
 
 FieldTest.add('Model Heading', {
@@ -42,7 +43,7 @@ FieldTest.add('Model Heading', {
 	text:              { type: Types.Text },
 	textarea:          { type: Types.Textarea },
 	textArray:         { type: Types.TextArray },
-	url:               { type: Types.Url }
+	url:               { type: Types.Url },
 });
 
 FieldTest.add('Needs Configuration', {

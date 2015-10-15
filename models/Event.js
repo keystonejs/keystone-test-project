@@ -1,13 +1,14 @@
-const keystone = require('keystone');
-const Types = keystone.Field.Types;
+var keystone = require('keystone');
+var transform = require('model-transform');
+var Types = keystone.Field.Types;
 
 var Event = new keystone.List('Event', {
 	autokey: { from: 'name', path: 'key', unique: true },
-	track: true
+	track: true,
 });
 
 var deps = {
-	videoEmbed: { videoEmbed: true, videoEmbedData: { exists: true } }
+	videoEmbed: { videoEmbed: true, videoEmbedData: { exists: true } },
 };
 
 Event.add({
@@ -22,7 +23,7 @@ Event.add('Contact Information', {
 	phone: { type: String, width: 'short' },
 	website: { type: Types.Url, collapse: true },
 	location: { type: Types.Location, collapse: true, initial: true, required: ['suburb'] },
-	bookingUrl: { type: Types.Url, collapse: true }
+	bookingUrl: { type: Types.Url, collapse: true },
 });
 
 Event.add('Description', {
@@ -30,9 +31,9 @@ Event.add('Description', {
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		summary: { type: Types.Html, hidden: true },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 }
+		extended: { type: Types.Html, wysiwyg: true, height: 400 },
 	},
-	schedule: { type: Types.Html, wysiwyg: true, collapse: true }
+	schedule: { type: Types.Html, wysiwyg: true, collapse: true },
 });
 
 Event.defaultColumns = 'name, eventType|15%, eventState|15%, startDate|15%';
