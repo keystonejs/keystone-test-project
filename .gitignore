@@ -32,3 +32,6 @@ node_modules
 
 # Ignore built css files
 *.min.css
+
+# Ignore temp/dev update scripts
+updates/0.0.0-*.js
