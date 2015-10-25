@@ -50,6 +50,7 @@ keystone.initExpressSession();
 
 app.use(compression());
 app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
+app.use(express.static('public'));
 
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -58,17 +59,21 @@ app.use(multer({
 }));
 
 app.use(keystone.get('session options').cookieParser);
-app.use(this.expressSession);
+app.use(keystone.expressSession);
 app.use(keystone.session.persist);
 app.use(require('connect-flash')());
 
 app.use(morgan('tiny'));
 app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 
+app.get('/', function(req, res) {
+	res.redirect('/keystone');
+});
+
 keystone.openDatabaseConnection(function() {
 	var server = app.listen(process.env.PORT || 3001, function() {
-		console.log('------------------------------')
-		console.log('Admin server ready on port %d', server.address().port)
-		console.log('------------------------------')
+		console.log('-------------------------------');
+		console.log('Admin server ready on port %d', server.address().port);
+		console.log('-------------------------------');
 	});
 });
