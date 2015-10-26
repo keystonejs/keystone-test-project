@@ -52,12 +52,6 @@ app.use(compression());
 app.use('/keystone', keystone.Admin.Server.createStaticRouter(keystone));
 app.use(express.static('public'));
 
-app.use(bodyParser.json({}));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multer({
-	includeEmptyFields: true
-}));
-
 app.use(keystone.get('session options').cookieParser);
 app.use(keystone.expressSession);
 app.use(keystone.session.persist);
