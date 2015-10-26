@@ -45,7 +45,7 @@ keystone.set('nav', {
 	'test-schemas': ['autocreates', 'field-tests'],
 });
 
-keystone.initMongo();
+keystone.initDatabase();
 keystone.initExpressSession();
 
 app.use(compression());
