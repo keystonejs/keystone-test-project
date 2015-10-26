@@ -60,7 +60,7 @@ app.use(require('connect-flash')());
 app.use(morgan('tiny'));
 app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 
-app.get('/', function(req, res) {
+app.use(function(req, res) {
 	res.redirect('/keystone');
 });
 
