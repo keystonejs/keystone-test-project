@@ -34,4 +34,7 @@ keystone.set('nav', {
 	'test-schemas': ['autocreates', 'field-tests'],
 });
 
-keystone.start();
+keystone.start({
+	onMount () { console.log('Application Mounted'); },
+	onStart () { console.log('Application Started'); },
+});
