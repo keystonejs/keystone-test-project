@@ -13,7 +13,7 @@ Company.add({
 	twitter: { type: String, size: 'small', index: true },
 });
 
-Company.relationship({ ref: 'User', path: 'users' });
+Company.relationship({ ref: 'User', path: 'users', refPath: 'company' });
 
 transform.toJSON(Company);
 Company.defaultColumns = 'name, website, github, twitter';
