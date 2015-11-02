@@ -30,7 +30,7 @@ keystone.set('locals', {
 keystone.set('routes', require('./routes'));
 keystone.set('nav', {
 	'people': ['users', 'companies', 'contacts'],
-	'content': ['posts', 'post-categories', 'events', 'jobs'],
+	'content': ['posts', 'post-categories', 'events', 'jobs', 'galleries'],
 	'test-schemas': ['autocreates', 'field-tests'],
 });
 
