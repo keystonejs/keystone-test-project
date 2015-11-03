@@ -20,7 +20,7 @@ exports.options = {
 };
 
 exports.locals = {
-	env: keystone.get('env'),
+	env: process.NODE_ENV,
 };
 
 exports.nav = {

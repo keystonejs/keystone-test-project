@@ -42,7 +42,7 @@ app.use(function(req, res) {
 keystone.openDatabaseConnection(function() {
 	var server = app.listen(process.env.PORT || 3001, function() {
 		console.log('-------------------------------');
-		console.log('Admin server ready on port %d', server.address().port);
+		console.log('Express server ready on port %d', server.address().port);
 		console.log('-------------------------------');
 	});
 });
