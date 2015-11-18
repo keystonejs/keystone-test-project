@@ -12,6 +12,7 @@
     "connect-flash": "^0.1.1",
     "elemental": "^0.5.3",
     "express": "^4.13.3",
+    "jade": "^1.11.0",
     "keystone": "https://github.com/keystonejs/keystone.git",
     "lorem-ipsum": "^1.0.3",
     "model-transform": "^1.1.0",
