@@ -4,7 +4,7 @@ import { Button, Form, FormField, FormInput } from 'elemental';
 
 const App = React.createClass({
 	componentDidMount () {
-		this.refs.btn.focus();
+		ReactDOM.findDOMNode(this.refs.btn).focus();
 	},
 	gotoKeystone () {
 		window.location.href = '/keystone';
