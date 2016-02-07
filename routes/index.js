@@ -15,6 +15,11 @@ exports = module.exports = function(app) {
 	}));
 
 	// Views
+	app.get('/api', function(req, res) {
+		res.render('api');
+	});
+
+	// Views
 	app.use(function(req, res) {
 		res.render('index');
 	});
