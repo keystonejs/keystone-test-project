@@ -9,7 +9,8 @@ exports = module.exports = function(app) {
 
 	app.use('/js', browserify('./client/scripts', {
 		transform: [babelify.configure({
-			plugins: ['object-assign'],
+			plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-object-assign')],
+			presets: [require('babel-preset-es2015'), require('babel-preset-react')],
 		})],
 	}));
 
