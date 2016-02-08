@@ -16,7 +16,12 @@ exports = module.exports = function(app) {
 
 	// Views
 	app.get('/api', function(req, res) {
-		res.render('api');
+		res.render('api', {
+			Keystone: {
+				csrf_header_key: keystone.security.csrf.CSRF_HEADER_KEY,
+				csrf_token_value: keystone.security.csrf.getToken(req, res),
+			},
+		});
 	});
 
 	// Views

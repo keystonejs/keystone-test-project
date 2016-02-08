@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import xhr from 'xhr';
 import { Button, Form, FormField, FormInput } from 'elemental';
+
+import api from '../../client/lib/api';
 
 const Test = React.createClass({
 	getInitialState () {
@@ -19,7 +20,7 @@ const Test = React.createClass({
 	},
 	runTest () {
 		this.props.onRun();
-		xhr.post('/keystone/api/user/create', {
+		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, function (err, res, body) {
 			console.log(err, res, body);
