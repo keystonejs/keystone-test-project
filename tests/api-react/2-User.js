@@ -8,9 +8,9 @@ const Test = React.createClass({
 	getInitialState () {
 		return {
 			data: {
-				name: '',
-				email: '',
-				password: '',
+				name: 'Vito Belgiorno-Zegna',
+				email: 'test-' + Date.now() + '@keystonejs.com',
+				password: 'test1234',
 			},
 		};
 	},
@@ -23,29 +23,27 @@ const Test = React.createClass({
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
-			// TODO: this endpoint should return useful validation errors.
-			// we're going to skip past it for now by expecting a 500 code
-			// with { error: 'database error' }
-			this.props.onPass();
+			console.log(body);
+			this.props.onPass({ user: body });
 		});
 	},
 	render () {
 		return (
 			<div>
 				<h2 style={{ marginBottom: 0 }}>Create User</h2>
-				<Form type="horizontal" style={{ marginTop: 40 }}>
-					<FormField label="Name:">
-						<FormInput />
+				<Form type="horizontal" style={{ marginTop: 40}}>
+					<FormField label="Name">
+						<FormInput defaultValue={this.state.data.name} />
 					</FormField>
-					<FormField label="Email address:">
-						<FormInput />
+					<FormField label="Email address">
+						<FormInput defaultValue={this.state.data.email} />
 					</FormField>
-					<FormField label="Password:">
-						<FormInput />
+					<FormField label="Password">
+						<FormInput defaultValue={this.state.data.password} />
 					</FormField>
 				</Form>
 				<hr />
-				<Button ref="btn" type="primary" onClick={this.runTest}>Test Create User</Button>
+				<Button ref="btn" type="primary" onClick={this.runTest}>Test 2 Create User</Button>
 			</div>
 		);
 	}

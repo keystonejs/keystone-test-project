@@ -27,8 +27,12 @@ const App = React.createClass({
 	handleStepRun () {
 		this.log(`Step ${this.state.step} run\n`);
 	},
-	handleStepResult () {
-		this.log(`Step ${this.state.step} result\n`);
+	handleStepPass (nextStepContext) {
+		this.log(`Step ${this.state.step} passed\n`);
+		this.setState({
+			step: this.state.step + 1,
+			stepContext: nextStepContext,
+		});
 	},
 	renderLog () {
 		return this.state.log.map((msg, i) => {
@@ -41,7 +45,7 @@ const App = React.createClass({
 		return (
 			<div style={{ paddingLeft: 20, paddingRight: 20 }}>
 				<div style={styles.box}>
-					<StepComponent onInit={this.handleStepInit} onRun={this.handleStepRun} onResult={this.handleStepResult} />
+					<StepComponent onInit={this.handleStepInit} onRun={this.handleStepRun} onPass={this.handleStepPass} stepContext={this.state.stepContext} />
 				</div>
 				<div>
 					{this.renderLog()}
