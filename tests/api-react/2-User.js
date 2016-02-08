@@ -23,7 +23,7 @@ const Test = React.createClass({
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
-			console.log(body);
+			console.log('BAM ' + body.fields.email + ' == ' + this.state.data.email);
 			this.props.onPass({ user: body });
 		});
 	},

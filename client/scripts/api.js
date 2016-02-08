@@ -8,6 +8,7 @@ const App = React.createClass({
 		return {
 			log: [],
 			step: 1,
+			nextStepContext: {},
 		};
 	},
 	log (msg) {
@@ -47,7 +48,7 @@ const App = React.createClass({
 				<div style={styles.box}>
 					<StepComponent onInit={this.handleStepInit} onRun={this.handleStepRun} onPass={this.handleStepPass} stepContext={this.state.stepContext} />
 				</div>
-				<div>
+				<div style={styles.box}>
 					{this.renderLog()}
 				</div>
 			</div>
