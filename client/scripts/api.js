@@ -1,28 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Form, FormField, FormInput } from 'elemental';
+
+import steps from '../../tests/api-react';
 
 const App = React.createClass({
-	componentDidMount () {
-		ReactDOM.findDOMNode(this.refs.btn).focus();
+	getInitialState () {
+		return {
+			log: [],
+			step: 1,
+		};
+	},
+	log (msg) {
+		this.setState({
+			log: this.state.log.concat([
+				{ content: msg },
+			]),
+		});
+	},
+	handleStepInit () {
+		this.setState({
+			log: [
+				{ content: `Step ${this.state.step} initialised\n` },
+			],
+		});
+	},
+	handleStepRun () {
+		this.log(`Step ${this.state.step} run\n`);
+	},
+	handleStepResult () {
+		this.log(`Step ${this.state.step} result\n`);
+	},
+	renderLog () {
+		return this.state.log.map((msg, i) => {
+			let Tag = msg.tag || 'div';
+			return <Tag key={`log${i}`}>{msg.content}</Tag>;
+		});
 	},
 	render () {
+		const StepComponent = steps[this.state.step - 1];
 		return (
 			<div style={{ paddingLeft: 20, paddingRight: 20 }}>
 				<div style={styles.box}>
-					<img src="/images/logo.png" width="205" height="68" alt="KeystoneJS" />
-					<hr />
-					<h2 style={{ marginBottom: 0 }}>Create User</h2>
-					<Form type="horizontal" style={{ marginTop: 40 }}>
-						<FormField label="Email address:">
-							<FormInput name="email" value="user@keystonejs.com" />
-						</FormField>
-						<FormField label="Password:">
-							<FormInput name="password" value="admin" />
-						</FormField>
-					</Form>
-					<hr />
-					<Button ref="btn" type="primary">Test Create User</Button>
+					<StepComponent onInit={this.handleStepInit} onRun={this.handleStepRun} onResult={this.handleStepResult} />
+				</div>
+				<div>
+					{this.renderLog()}
 				</div>
 			</div>
 		);
