@@ -1,5 +1,5 @@
 module.exports = [
-	require('./1-User'),
-	require('./2-User'),
-	require('./3-User'),
+	require('./user/1-User'),
+	require('./user/2-User'),
+	require('./user/3-User'),
 ];

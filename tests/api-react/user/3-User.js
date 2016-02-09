@@ -2,7 +2,7 @@ import React from'react';
 import ReactDOM from 'react-dom';
 import { Button, Form, FormField, FormInput } from 'elemental';
 
-import api from '../../client/lib/api';
+import api from '../../../client/lib/api';
 
 const Test = React.createClass({
 	getInitialState () {
@@ -29,7 +29,7 @@ const Test = React.createClass({
 			json: this.state.data,
 		}, (err, res, body) => {
 			console.log(body);
-			this.props.onPass()
+			this.props.onPass({ user: body })
 		})
 	},
 	render () {
