@@ -26,6 +26,11 @@ const Test = React.createClass({
 						<FileUpload buttonLabelInitial="Upload Image" buttonLabelChange="Change Image" onChange={this.handleFile} />
 					</FormField>
 				</Form>
+				<hr />
+				<div style={{ overflow: "auto", padding: 4}}>
+					<Button ref="btn" type="primary" onClick={this.runTest}>Test Image Upload</Button>
+					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Next</Button>
+				</div>
 			</div>
 		);
 	}

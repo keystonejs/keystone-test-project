@@ -46,7 +46,7 @@ const Test = React.createClass({
 				</Form>
 				<hr />
 				<div style={{ overflow: "auto", padding: 4}}>
-					<Button ref="btn" type="primary" onClick={this.runTest}Test Create User</Button>
+					<Button ref="btn" type="primary" onClick={this.runTest}>Test Create User</Button>
 					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Next</Button>
 				</div>
 			</div>
