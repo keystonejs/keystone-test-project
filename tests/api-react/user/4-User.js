@@ -49,7 +49,10 @@ const Test = React.createClass({
 					</FormField>
 				</Form>
 				<hr />
-				<Button ref="btn" type="primary" onClick={this.runTest}>Delete Test User</Button>
+				<div style={{ overflow: "auto", padding: 4}}>
+					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Delete Test User</Button>
+					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Next</Button>
+				</div>
 			</div>
 		);
 	}

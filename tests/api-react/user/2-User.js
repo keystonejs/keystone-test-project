@@ -23,8 +23,13 @@ const Test = React.createClass({
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
-			console.log('BAM ' + body.fields.email + ' == ' + this.state.data.email);
-			this.props.onPass({ user: body });
+
+			if (body.detail && body.detail.errmsg) {
+				console.log(body.detail.errmsg);
+			} else {
+				console.log('BAM ' + body.fields.email + ' == ' + this.state.data.email);
+				this.props.onPass({ user: body });
+			}
 		});
 	},
 	render () {
@@ -43,7 +48,10 @@ const Test = React.createClass({
 					</FormField>
 				</Form>
 				<hr />
-				<Button ref="btn" type="primary" onClick={this.runTest}>Test 2 Create User</Button>
+				<div style={{ overflow: "auto", padding: 4}}>
+					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Test 2 Create User</Button>
+					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Next</Button>
+				</div>
 			</div>
 		);
 	}
