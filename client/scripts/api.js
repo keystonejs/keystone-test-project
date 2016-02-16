@@ -10,6 +10,7 @@ const App = React.createClass({
 		return {
 			log: [],
 			step: 1,
+			stepContext: {},
 			nextStepContext: {},
 		};
 	},
@@ -19,13 +20,15 @@ const App = React.createClass({
 			style = styles.message;
 		}
 		this.setState({
-			log: this.state.log.concat([
-				{ style, content },
-			]),
+			log: [{ style, content }].concat(this.state.log),
 		});
 	},
 	stepReady () {
-		this.log(`Step ${this.state.step} ready\n`);
+		this.setState({
+			log: [],
+		}, () => {
+			this.log(`Step ${this.state.step} ready\n`);
+		});
 	},
 	stepRun () {
 		this.log(`Step ${this.state.step} running...\n`);
@@ -37,22 +40,29 @@ const App = React.createClass({
 		}
 	},
 	stepAssert (msg) {
-		this.log(`Step ${this.state.step} asserts:\n`);
+		// this.log(`Step ${this.state.step} asserts:\n`);
 		var self = this;
 		return {
-			truthy (value) {
-				if (value) self.log(styles.pass, '[pass] ' + msg);
-				else self.log(styles.fail, '[fail] ' + msg);
+			truthy (fn) {
+				try {
+					if (fn()) self.log(styles.pass, '[pass] ' + msg);
+					else self.log(styles.fail, '[fail] ' + msg);
+				} catch (e) {
+					console.log(e);
+					self.log(styles.fail, '[error] ' + e.name + ': ' + e.message);
+				}
 			}
 		};
 	},
-	stepComplete () {
+	stepComplete (nextStepContext) {
+		this.setState({ nextStepContext });
 		this.log(`Step ${this.state.step} complete\n`);
 	},
-	nextStep (nextStepContext) {
+	nextStep () {
 		this.setState({
 			step: this.state.step + 1,
-			stepContext: nextStepContext,
+			stepContext: this.state.nextStepContext,
+			nextStepContext: null,
 		});
 	},
 	renderLog () {
@@ -64,6 +74,7 @@ const App = React.createClass({
 		});
 	},
 	render () {
+		console.log(this.state.stepContext);
 		const StepComponent = steps[this.state.step - 1];
 		return (
 			<div style={{ paddingLeft: 20, paddingRight: 20 }}>
@@ -77,6 +88,7 @@ const App = React.createClass({
 								ready={this.stepReady}
 								result={this.stepResult}
 								run={this.stepRun}
+								stepContext={this.state.stepContext}
 							/>
 						</div>
 					</Col>
@@ -100,25 +112,25 @@ const styles = {
 		padding: '3em',
 	},
 	obj: {
-		border: '1px solid #999',
+		border: '1px solid #ccc',
 		fontFamily: 'Monaco',
 		fontSize: '0.9em',
-		margin: '0.5em -1em',
-		padding: '1.2em',
+		margin: '0.3em -1em',
+		padding: '0.5em 1.3em',
 	},
 	message: {
 		fontSize: '1.2em',
-		margin: '0.5em',
+		margin: '0.2em',
 	},
 	pass: {
 		color: 'green',
 		fontFamily: 'Monaco',
-		margin: '0.5em',
+		margin: '0.2em',
 	},
 	fail: {
 		color: 'red',
 		fontFamily: 'Monaco',
-		margin: '0.5em',
+		margin: '0.2em',
 	},
 };
 
