@@ -4,10 +4,29 @@ var keystone = require('keystone');
 
 var importRoutes = keystone.importer(__dirname);
 
+var clientConfig = {
+	commonPackages: [
+		'elemental',
+		'react',
+		'react-addons-css-transition-group',
+		'react-dom',
+		'store-prototype',
+		'xhr',
+	],
+};
+
 // Setup Route Bindings
 exports = module.exports = function(app) {
 
+	// Bundle common packages
+	app.get('/js/packages.js', browserify(clientConfig.commonPackages, {
+		cache: true,
+		precompile: true,
+	}));
+
+	// Serve script bundles
 	app.use('/js', browserify('./client/scripts', {
+		external: clientConfig.commonPackages,
 		transform: [babelify.configure({
 			plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-object-assign')],
 			presets: [require('babel-preset-es2015'), require('babel-preset-react')],
