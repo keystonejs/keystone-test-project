@@ -58,7 +58,7 @@ const App = React.createClass({
 	renderLog () {
 		return this.state.log.map((msg, i) => {
 			if (typeof msg.content === 'object') {
-				return <Domify value={msg.content} style={styles.obj} />;
+				return <Domify style={styles.obj} key={`log${i}`} value={msg.content} />;
 			}
 			return <div style={msg.style} key={`log${i}`}>{msg.content}</div>;
 		});
