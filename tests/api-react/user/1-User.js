@@ -4,8 +4,10 @@ import ReactDOM from 'react-dom';
 import { Button, Col, Form, FormField, FormInput, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
+import styles from '../../../client/lib/styles';
 
 const Test = React.createClass({
+	displayName: '1-User',
 	getInitialState () {
 		return {
 			action: 'Start Test',
@@ -66,13 +68,5 @@ const Test = React.createClass({
 		);
 	}
 });
-
-const styles = {
-	data: {
-		fontFamily: 'Monaco',
-		fontSize: '0.9em',
-		marginTop: 20,
-	},
-};
 
 module.exports = Test;

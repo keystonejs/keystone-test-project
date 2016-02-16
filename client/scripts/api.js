@@ -5,13 +5,37 @@ import { Col, Row } from 'elemental';
 
 import steps from '../../tests/api-react';
 
+const FIRST_STEP = 3;
+
+function getStepContext (step) {
+	const stepIndex = step - 1;
+	if (!steps[stepIndex]) return {};
+	const stepName = steps[stepIndex].displayName;
+	let json = localStorage.getItem(`keystone-test-step-${stepName}`);
+	try {
+		return JSON.parse(json || '{}');
+	} catch (e) {
+		console.error(`Could not parse stepContext for ${stepName}:`);
+		console.error(json);
+		return {};
+	}
+}
+
+function setStepContext (step, data) {
+	const stepIndex = step - 1;
+	if (!steps[stepIndex]) return;
+	const stepName = steps[stepIndex].displayName;
+	console.log('Setting stepContext for ' + stepName);
+	localStorage.setItem(`keystone-test-step-${stepName}`, JSON.stringify(data || {}));
+}
+
 const App = React.createClass({
+	displayName: 'API Test App',
 	getInitialState () {
 		return {
 			log: [],
-			step: 1,
-			stepContext: {},
-			nextStepContext: {},
+			step: FIRST_STEP,
+			stepContext: getStepContext(FIRST_STEP),
 		};
 	},
 	log (style, content) {
@@ -35,7 +59,7 @@ const App = React.createClass({
 	},
 	stepResult () {
 		this.log(`Step ${this.state.step} result:\n`);
-		for (var i = 0; i < arguments.length; i++) {
+		for (let i = 0; i < arguments.length; i++) {
 			this.log(arguments[i]);
 		}
 	},
@@ -55,14 +79,15 @@ const App = React.createClass({
 		};
 	},
 	stepComplete (nextStepContext) {
-		this.setState({ nextStepContext });
+		const nextStep = this.state.step + 1;
+		setStepContext(nextStep, nextStepContext);
 		this.log(`Step ${this.state.step} complete\n`);
 	},
 	nextStep () {
+		const nextStep = this.state.step + 1;
 		this.setState({
-			step: this.state.step + 1,
-			stepContext: this.state.nextStepContext,
-			nextStepContext: null,
+			step: nextStep,
+			stepContext: getStepContext(nextStep),
 		});
 	},
 	renderLog () {
@@ -74,7 +99,6 @@ const App = React.createClass({
 		});
 	},
 	render () {
-		console.log(this.state.stepContext);
 		const StepComponent = steps[this.state.step - 1];
 		return (
 			<div style={{ paddingLeft: 20, paddingRight: 20 }}>
