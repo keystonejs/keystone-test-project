@@ -1,5 +1,7 @@
+import Domify from 'react-domify';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Col, Row } from 'elemental';
 
 import steps from '../../tests/api-react';
 
@@ -11,25 +13,43 @@ const App = React.createClass({
 			nextStepContext: {},
 		};
 	},
-	log (msg) {
+	log (style, content) {
+		if (arguments.length === 1) {
+			content = style;
+			style = styles.message;
+		}
 		this.setState({
 			log: this.state.log.concat([
-				{ content: msg },
+				{ style, content },
 			]),
 		});
 	},
-	handleStepInit () {
-		this.setState({
-			log: [
-				{ content: `Step ${this.state.step} initialised\n` },
-			],
-		});
+	stepReady () {
+		this.log(`Step ${this.state.step} ready\n`);
 	},
-	handleStepRun () {
-		this.log(`Step ${this.state.step} run\n`);
+	stepRun () {
+		this.log(`Step ${this.state.step} running...\n`);
 	},
-	handleStepPass (nextStepContext) {
-		this.log(`Step ${this.state.step} passed\n`);
+	stepResult () {
+		this.log(`Step ${this.state.step} result:\n`);
+		for (var i = 0; i < arguments.length; i++) {
+			this.log(arguments[i]);
+		}
+	},
+	stepAssert (msg) {
+		this.log(`Step ${this.state.step} asserts:\n`);
+		var self = this;
+		return {
+			truthy (value) {
+				if (value) self.log(styles.pass, '[pass] ' + msg);
+				else self.log(styles.fail, '[fail] ' + msg);
+			}
+		};
+	},
+	stepComplete () {
+		this.log(`Step ${this.state.step} complete\n`);
+	},
+	nextStep (nextStepContext) {
 		this.setState({
 			step: this.state.step + 1,
 			stepContext: nextStepContext,
@@ -37,20 +57,35 @@ const App = React.createClass({
 	},
 	renderLog () {
 		return this.state.log.map((msg, i) => {
-			let Tag = msg.tag || 'div';
-			return <Tag key={`log${i}`}>{msg.content}</Tag>;
+			if (typeof msg.content === 'object') {
+				return <Domify value={msg.content} style={styles.obj} />;
+			}
+			return <div style={msg.style} key={`log${i}`}>{msg.content}</div>;
 		});
 	},
 	render () {
 		const StepComponent = steps[this.state.step - 1];
 		return (
 			<div style={{ paddingLeft: 20, paddingRight: 20 }}>
-				<div style={styles.box}>
-					<StepComponent onInit={this.handleStepInit} onRun={this.handleStepRun} onPass={this.handleStepPass} stepContext={this.state.stepContext} />
-				</div>
-				<div style={styles.box}>
-					{this.renderLog()}
-				</div>
+				<Row>
+					<Col sm="1/2">
+						<div style={styles.box}>
+							<StepComponent
+								assert={this.stepAssert}
+								complete={this.stepComplete}
+								next={this.nextStep}
+								ready={this.stepReady}
+								result={this.stepResult}
+								run={this.stepRun}
+							/>
+						</div>
+					</Col>
+					<Col sm="1/2">
+						<div style={styles.box}>
+							{this.renderLog()}
+						</div>
+					</Col>
+				</Row>
 			</div>
 		);
 	}
@@ -62,8 +97,28 @@ const styles = {
 		borderRadius: '0.3em',
 		boxShadow: '0 2px 3px rgba(0, 0, 0, 0.075), 0 0 0 1px rgba(0,0,0,0.1)',
 		margin: '6vh auto',
-		maxWidth: 480,
 		padding: '3em',
+	},
+	obj: {
+		border: '1px solid #999',
+		fontFamily: 'Monaco',
+		fontSize: '0.9em',
+		margin: '0.5em -1em',
+		padding: '1.2em',
+	},
+	message: {
+		fontSize: '1.2em',
+		margin: '0.5em',
+	},
+	pass: {
+		color: 'green',
+		fontFamily: 'Monaco',
+		margin: '0.5em',
+	},
+	fail: {
+		color: 'red',
+		fontFamily: 'Monaco',
+		margin: '0.5em',
 	},
 };
 

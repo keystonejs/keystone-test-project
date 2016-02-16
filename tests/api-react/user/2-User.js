@@ -8,28 +8,25 @@ const Test = React.createClass({
 	getInitialState () {
 		return {
 			data: {
-				name: 'Vito Belgiorno-Zegna',
+				'name.full': 'Vito Belgiorno-Zegna',
 				email: 'test-' + Date.now() + '@keystonejs.com',
 				password: 'test1234',
 			},
 		};
 	},
 	componentDidMount () {
-		this.props.onInit();
+		this.props.ready();
 		ReactDOM.findDOMNode(this.refs.btn).focus();
 	},
 	runTest () {
-		this.props.onRun();
+		this.props.run();
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
-
-			if (body.detail && body.detail.errmsg) {
-				console.log(body.detail.errmsg);
-			} else {
-				console.log('BAM ' + body.fields.email + ' == ' + this.state.data.email);
-				this.props.onPass({ user: body });
-			}
+			this.props.result('Received response:', body);
+			this.props.assert('status code is 200').truthy(res.statusCode === 200);
+			this.props.assert('email returned successfully').truthy(body.fields.email === this.state.data.email);
+			this.props.complete();
 		});
 	},
 	render () {

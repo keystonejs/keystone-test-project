@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Form, FormField, FormInput } from 'elemental';
+import { Button, Col, Form, FormField, FormInput, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 
@@ -15,18 +15,17 @@ const Test = React.createClass({
 		};
 	},
 	componentDidMount () {
-		this.props.onInit();
-		ReactDOM.findDOMNode(this.refs.btn).focus();
+		this.props.ready();
+		ReactDOM.findDOMNode(this.refs.run).focus();
 	},
 	runTest () {
-		this.props.onRun();
+		this.props.run();
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
-			// TODO: this endpoint should return useful validation errors.
-			// we're going to skip past it for now by expecting a 500 code
-			// with { error: 'database error' }
-			this.props.onPass();
+			this.props.result('Received response:', body);
+			this.props.assert('status code is 400').truthy(res.statusCode === 400);
+			this.props.complete();
 		});
 	},
 	render () {
@@ -45,10 +44,14 @@ const Test = React.createClass({
 					</FormField>
 				</Form>
 				<hr />
-				<div style={{ overflow: "auto", padding: 4}}>
-					<Button ref="btn" type="primary" onClick={this.runTest}>Test Create User</Button>
-					<Button ref="btn" type="primary" onClick={this.runTest} style={{ float: "right" }}>Next</Button>
-				</div>
+				<Row>
+					<Col sm="1/2">
+						<Button ref="run" type="primary" onClick={this.runTest}>Test Create User</Button>
+					</Col>
+					<Col sm="1/2" style={{ align: 'right' }}>
+						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
+					</Col>
+				</Row>
 			</div>
 		);
 	}
