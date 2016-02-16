@@ -9,6 +9,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
+    "blacklist": "^1.1.2",
     "body-parser": "^1.14.2",
     "browserify-middleware": "^7.0.0",
     "compression": "^1.6.1",

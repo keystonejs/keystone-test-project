@@ -1,3 +1,4 @@
+import blacklist from 'blacklist';
 import Domify from 'react-domify';
 import React from'react';
 import ReactDOM from 'react-dom';
@@ -32,16 +33,14 @@ const Test = React.createClass({
 				this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
 				this.props.assert('password is required').truthy(() => body.detail.password.type === 'required');
 				this.setState({
-					data: {
-						name: this.state.data.name,
-					},
+					data: blacklist(this.state.data, 'password'),
 				});
 			} else {
 				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
 				this.props.assert('name has been updated').truthy(() => body.name === `${this.state.data.name.first} ${this.state.data.name.last}`);
 				this.props.complete({ user: body });
 			}
-		})
+		});
 	},
 	render () {
 		return (

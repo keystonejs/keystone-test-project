@@ -1,8 +1,7 @@
 module.exports = [
-	require('./user/1-User'), // Create Blank User
-	require('./user/2-User'), // Create User (2)
-	require('./user/3-User'),
-	require('./user/4-User'),
-	require('./user/5-User'), // delete is unneeded
+	require('./user/1-User'), // Tests User validation
+	require('./user/2-User'), // Creates a new User
+	require('./user/3-User'), // Updates the User
+	require('./user/4-User'), // Deletes the User
 	require('./image/1-Image'),
 ];

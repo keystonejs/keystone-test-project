@@ -5,7 +5,7 @@ import { Col, Row } from 'elemental';
 
 import steps from '../../tests/api-react';
 
-const FIRST_STEP = 3;
+const FIRST_STEP = 1;
 
 function getStepContext (step) {
 	const stepIndex = step - 1;
