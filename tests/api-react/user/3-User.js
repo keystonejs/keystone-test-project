@@ -12,9 +12,8 @@ const Test = React.createClass({
 	getInitialState () {
 		return {
 			data: {
-				name: this.props.stepContext.user.fields.name,
-				email: this.props.stepContext.user.fields.email,
-				password: this.props.stepContext.user.fields.password,
+				name: { first: 'Test', last: 'Update' },
+				password: '',
 			},
 		};
 	},
@@ -28,9 +27,20 @@ const Test = React.createClass({
 			json: this.state.data,
 		}, (err, res, body) => {
 			this.props.result('Received response:', body);
-			this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
-			// TODO assert some things
-			this.props.complete({ user: body });
+			if (this.state.data.password === '') {
+				this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
+				this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
+				this.props.assert('password is required').truthy(() => body.detail.password.type === 'required');
+				this.setState({
+					data: {
+						name: this.state.data.name,
+					},
+				});
+			} else {
+				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
+				this.props.assert('name has been updated').truthy(() => body.name === `${this.state.data.name.first} ${this.state.data.name.last}`);
+				this.props.complete({ user: body });
+			}
 		})
 	},
 	render () {
