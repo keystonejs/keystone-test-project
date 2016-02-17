@@ -14,7 +14,7 @@
     "browserify-middleware": "^7.0.0",
     "compression": "^1.6.1",
     "connect-flash": "^0.1.1",
-    "elemental": "^0.5.11",
+    "elemental": "^0.5.12",
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "keystone": "https://github.com/keystonejs/keystone.git",

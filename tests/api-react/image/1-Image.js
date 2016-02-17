@@ -7,22 +7,47 @@ import api from '../../../client/lib/api';
 const Test = React.createClass({
 	getInitialState () {
 		return {
-			file: {},
+			file: null,
+			dataURI: null,
+			data: {},
 		};
 	},
 	componentDidMount () {
-		this.props.onInit();
+		this.props.ready();
 	},
-	handleFile (e) {
-		let file = e.target.files[0]
-		console.log(file);
+	handleFile (e, data) {
+		console.log(e, data);
+		this.setState({
+			file: data.file,
+			dataURI: data.dataURI,
+		});
+	},
+	runTest () {
+		this.props.run();
+		api.post('/keystone/api/galleries/create', {
+			json: this.state.data,
+		}, (err, res, body) => {
+			this.props.result('Received response:', body);
+			// if (this.state.data.password === '') {
+			// 	this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
+			// 	this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
+			// 	this.props.assert('password is required').truthy(() => body.detail.password.type === 'required');
+			// 	this.setState({
+			// 		data: blacklist(this.state.data, 'password'),
+			// 	});
+			// } else {
+			// 	this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
+			// 	this.props.assert('name has been updated').truthy(() => body.name === `${this.state.data.name.first} ${this.state.data.name.last}`);
+			// 	this.props.complete({ user: body });
+			// }
+		});
 	},
 	render () {
 		return (
 			<div>
 				<h2 style={{ marginBottom: 0 }}>Upload Image</h2>
 				<Form type="horizontal">
-					<FormField label="Image">
+					<FormField label="Image" style={localStyles.field}>
 						<FileUpload buttonLabelInitial="Upload Image" buttonLabelChange="Change Image" onChange={this.handleFile} />
 					</FormField>
 				</Form>
@@ -31,13 +56,19 @@ const Test = React.createClass({
 					<Col sm="1/2">
 						<Button ref="run" type="primary" onClick={this.runTest}>Test Image Upload</Button>
 					</Col>
-					<Col sm="1/2" style={{ align: 'right' }}>
+					{/*<Col sm="1/2" style={{ align: 'right' }}>
 						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
-					</Col>
+					</Col>*/}
 				</Row>
 			</div>
 		);
 	}
 });
+
+const localStyles = {
+	field: {
+		marginTop: 20,
+	},
+};
 
 module.exports = Test;
