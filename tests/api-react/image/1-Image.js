@@ -9,14 +9,12 @@ const Test = React.createClass({
 		return {
 			file: null,
 			dataURI: null,
-			data: {},
 		};
 	},
 	componentDidMount () {
 		this.props.ready();
 	},
 	handleFile (e, data) {
-		console.log(e, data);
 		this.setState({
 			file: data.file,
 			dataURI: data.dataURI,
@@ -24,8 +22,13 @@ const Test = React.createClass({
 	},
 	runTest () {
 		this.props.run();
+		var formData = new window.FormData();
+		formData.append('name', 'Test ' + Date.now());
+		if (this.state.file) {
+			formData.append('heroImage', this.state.file);
+		}
 		api.post('/keystone/api/galleries/create', {
-			json: this.state.data,
+			body: formData,
 		}, (err, res, body) => {
 			this.props.result('Received response:', body);
 			// if (this.state.data.password === '') {
