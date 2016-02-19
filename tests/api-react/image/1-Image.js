@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Col, Form, FormField, FormInput, FileUpload, Row } from 'elemental';
+import { Button, Col, Form, FormField, FormInput, FileUpload, Radio, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 
@@ -9,6 +9,7 @@ const Test = React.createClass({
 		return {
 			file: null,
 			dataURI: null,
+			uploadMode: 'fileData',
 		};
 	},
 	componentDidMount () {
@@ -20,12 +21,19 @@ const Test = React.createClass({
 			dataURI: data.dataURI,
 		});
 	},
+	setUploadMode (e) {
+		this.setState({
+			uploadMode: e.target.value
+		});
+	},
 	runTest () {
 		this.props.run();
 		var formData = new window.FormData();
 		formData.append('name', 'Test ' + Date.now());
-		if (this.state.file) {
+		if (this.state.file && this.state.uploadMode === 'fileData') {
 			formData.append('heroImage', this.state.file);
+		} else if (this.state.dataURI && this.state.uploadMode === 'base64') {
+			formData.append('heroImage', this.state.dataURI);
 		}
 		api.post('/keystone/api/galleries/create', {
 			body: formData,
@@ -48,6 +56,10 @@ const Test = React.createClass({
 			<div>
 				<h2 style={{ marginBottom: 0 }}>Upload Image</h2>
 				<Form type="horizontal">
+					<FormField label="Radios">
+						<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
+						<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
+					</FormField>
 					<FormField label="Image" style={localStyles.field}>
 						<FileUpload buttonLabelInitial="Upload Image" buttonLabelChange="Change Image" onChange={this.handleFile} />
 					</FormField>
