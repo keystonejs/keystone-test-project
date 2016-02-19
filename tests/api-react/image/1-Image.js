@@ -79,9 +79,9 @@ const Test = React.createClass({
 					<Col sm="1/2">
 						<Button ref="run" type="primary" onClick={this.runTest}>Test Image Upload</Button>
 					</Col>
-					{/*<Col sm="1/2" style={{ align: 'right' }}>
+					<Col sm="1/2" style={{ align: 'right' }}>
 						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
-					</Col>*/}
+					</Col>
 				</Row>
 			</div>
 		);
