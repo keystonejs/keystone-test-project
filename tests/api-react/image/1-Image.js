@@ -29,8 +29,10 @@ const Test = React.createClass({
 		}
 		api.post('/keystone/api/galleries/create', {
 			body: formData,
+			responseType: 'json',
 		}, (err, res, body) => {
 			this.props.result('Received response:', body);
+			this.props.complete({ gallery: body });
 			// if (this.state.data.password === '') {
 			// 	this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
 			// 	this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
