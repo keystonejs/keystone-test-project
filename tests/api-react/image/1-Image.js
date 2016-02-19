@@ -34,6 +34,8 @@ const Test = React.createClass({
 			formData.append('heroImage', this.state.file);
 		} else if (this.state.dataURI && this.state.uploadMode === 'base64') {
 			formData.append('heroImage', this.state.dataURI);
+		} else if (this.state.uploadMode === 'remoteImage') {
+			formData.append('heroImage', 'http://keystonejs.com/images/logo.png');
 		}
 		api.post('/keystone/api/galleries/create', {
 			body: formData,
@@ -43,6 +45,11 @@ const Test = React.createClass({
 			if (this.state.file) {
 				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
 				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.secure_url.substr(0,26) === 'https://res.cloudinary.com');
+				this.props.complete({ gallery: body });
+			} else if (this.state.uploadMode === 'remoteImage') {
+				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
+				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.secure_url.substr(0,26) === 'https://res.cloudinary.com');
+				this.props.assert('image is the correct size').truthy(() => body.fields.heroImage.width === 207);
 				this.props.complete({ gallery: body });
 			} else {
 				this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
@@ -57,8 +64,11 @@ const Test = React.createClass({
 				<h2 style={{ marginBottom: 0 }}>Upload Image</h2>
 				<Form type="horizontal">
 					<FormField label="Radios">
-						<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
-						<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
+						<div className="inline-controls">
+							<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
+							<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
+							<Radio value="remoteImage" checked={this.state.uploadMode === 'remoteImage'} onChange={this.setUploadMode} label="Remote Image" />
+						</div>
 					</FormField>
 					<FormField label="Image" style={localStyles.field}>
 						<FileUpload buttonLabelInitial="Upload Image" buttonLabelChange="Change Image" onChange={this.handleFile} />
