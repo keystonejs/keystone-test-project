@@ -32,19 +32,15 @@ const Test = React.createClass({
 			responseType: 'json',
 		}, (err, res, body) => {
 			this.props.result('Received response:', body);
-			this.props.complete({ gallery: body });
-			// if (this.state.data.password === '') {
-			// 	this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
-			// 	this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
-			// 	this.props.assert('password is required').truthy(() => body.detail.password.type === 'required');
-			// 	this.setState({
-			// 		data: blacklist(this.state.data, 'password'),
-			// 	});
-			// } else {
-			// 	this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
-			// 	this.props.assert('name has been updated').truthy(() => body.name === `${this.state.data.name.first} ${this.state.data.name.last}`);
-			// 	this.props.complete({ user: body });
-			// }
+			if (this.state.file) {
+				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
+				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.secure_url.substr(0,26) === 'https://res.cloudinary.com');
+				this.props.complete({ gallery: body });
+			} else {
+				this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
+				this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
+				this.props.assert('image is required').truthy(() => body.detail.heroImage.type === 'required');
+			}
 		});
 	},
 	render () {
