@@ -33,7 +33,7 @@ const Test = React.createClass({
 			formData.append('images[]', this.state.image_two);
 		}
 
-		api.post('/keystone/api/users/' + this.props.stepContext.gallery.id, {
+		api.post('/keystone/api/galleries/' + this.props.stepContext.gallery.id, {
 			body: formData,
 			responseType: 'json',
 		}, (err, res, body) => {
