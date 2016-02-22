@@ -25,12 +25,18 @@ const Test = React.createClass({
 	runTest () {
 		this.props.run();
 		var formData = new window.FormData();
-
+		var images = 0;
+		formData.append('name', 'Test Updated ' + Date.now());
 		if (this.state.image_one) {
-			formData.append('images[]', this.state.image_one);
+			images++;
+			formData.append('images', this.state.image_one.file);
 		}
 		if (this.state.image_two) {
-			formData.append('images[]', this.state.image_two);
+			images++;
+			formData.append('images', this.state.image_two.file);
+		}
+		if (!images) {
+			formData.append('images', '');
 		}
 
 		api.post('/keystone/api/galleries/' + this.props.stepContext.gallery.id, {
@@ -38,7 +44,14 @@ const Test = React.createClass({
 			responseType: 'json',
 		}, (err, res, body) => {
 			this.props.result('Received response:', body);
-
+			this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
+			if (images >= 1) {
+				this.props.assert('image 1 has been uploaded').truthy(() => body.fields.images[0].url.substr(0,25) === 'http://res.cloudinary.com');
+			}
+			if (images >= 2) {
+				this.props.assert('image 2 has been uploaded').truthy(() => body.fields.images[1].url.substr(0,25) === 'http://res.cloudinary.com');
+			}
+			this.props.assert('images array contains the right number of items').truthy(() => body.fields.images.length === images);
 		});
 	},
 	render () {
