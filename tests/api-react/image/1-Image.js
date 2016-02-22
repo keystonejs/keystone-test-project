@@ -44,11 +44,11 @@ const Test = React.createClass({
 			this.props.result('Received response:', body);
 			if (this.state.file) {
 				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
-				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.secure_url.substr(0,26) === 'https://res.cloudinary.com');
+				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.url.substr(0, 25) === 'http://res.cloudinary.com');
 				this.props.complete({ gallery: body });
 			} else if (this.state.uploadMode === 'remoteImage') {
 				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
-				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.secure_url.substr(0,26) === 'https://res.cloudinary.com');
+				this.props.assert('image has been uploaded').truthy(() => body.fields.heroImage.url.substr(0, 25) === 'http://res.cloudinary.com');
 				this.props.assert('image is the correct size').truthy(() => body.fields.heroImage.width === 207);
 				this.props.complete({ gallery: body });
 			} else {
