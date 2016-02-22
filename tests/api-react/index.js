@@ -5,4 +5,5 @@ module.exports = [
 	require('./user/4-User'), // Deletes the User
 	require('./image/1-Image'), // Creates a Gallery and uploads an image
 	require('./image/2-Image'), // Updates the Gallery with multiple images
+	require('./image/3-Image'), // Reorders Gallery images then removes them
 ];

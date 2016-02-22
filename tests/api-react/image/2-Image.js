@@ -52,6 +52,7 @@ const Test = React.createClass({
 				this.props.assert('image 2 has been uploaded').truthy(() => body.fields.images[1].url.substr(0,25) === 'http://res.cloudinary.com');
 			}
 			this.props.assert('images array contains the right number of items').truthy(() => body.fields.images.length === images);
+			this.props.complete({ gallery: body });
 		});
 	},
 	render () {
@@ -71,9 +72,9 @@ const Test = React.createClass({
 					<Col sm="1/2">
 						<Button ref="run" type="primary" onClick={this.runTest}>Test Images Upload</Button>
 					</Col>
-					{/*<Col sm="1/2" style={{ align: 'right' }}>
+					<Col sm="1/2" style={{ align: 'right' }}>
 						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
-					</Col>*/}
+					</Col>
 				</Row>
 			</div>
 		);
