@@ -3,12 +3,10 @@
  * router to it, and using Keystone to intialise the database connection
  */
 
-var bodyParser = require('body-parser');
 var compression = require('compression');
 var express = require('express');
 var keystone = require('keystone');
 var morgan = require('morgan');
-var multer = require('multer');
 
 var config = require('./config');
 
