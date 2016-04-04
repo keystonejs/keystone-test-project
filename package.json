@@ -34,10 +34,18 @@
     "npm": ">=2.14.2"
   },
   "scripts": {
+    "dev": "KEYSTONE_DEV=true node keystone.js",
+    "dev_windows": "set KEYSTONE_DEV=true&&node keystone.js",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "start": "node keystone.js",
     "start:iron": "KEYSTONE_DEV=true iron-node keystone.js",
-    "dev": "KEYSTONE_DEV=true node keystone.js",
-    "dev_windows": "set KEYSTONE_DEV=true&&node keystone.js"
+    "test": "npm run lint"
   },
-  "main": "keystone.js"
+  "main": "keystone.js",
+  "devDependencies": {
+    "eslint": "^2.6.0",
+    "eslint-config-keystone": "^2.1.0",
+    "eslint-plugin-react": "^4.2.3"
+  }
 }
