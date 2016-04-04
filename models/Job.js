@@ -14,8 +14,8 @@ Job.set('notes', {
 Job.add({
 	name: { type: String, initial: true, required: true, index: true },
 	jobState: { type: Types.Select, options: 'draft, published, filled, archived', default: 'draft', index: true },
-	jobType: { type: Types.Select, options: [ 'full-time', 'part-time', 'casual', 'other' ], index: true },
-	jobRole: { type: Types.Select, options: [ 'accounting', 'admin', 'customer-service', 'human-resources', 'information-technology', 'sales-marketing', 'other' ], index: true },
+	jobType: { type: Types.Select, options: ['full-time', 'part-time', 'casual', 'other'], index: true },
+	jobRole: { type: Types.Select, options: ['accounting', 'admin', 'customer-service', 'human-resources', 'information-technology', 'sales-marketing', 'other'], index: true },
 	isFeatured: { type: Boolean, index: true },
 	startDate: { type: Types.Date },
 	publishedOn: { type: Types.Date, default: Date.now, noedit: true, index: true },
@@ -31,7 +31,7 @@ Job.add('Contact Information', {
 
 Job.add('Description', {
 	pay: { type: Types.Money },
-	payPer: { type: Types.Select, options: [ 'hour', 'week', 'fortnight', 'month', 'year' ], index: true },
+	payPer: { type: Types.Select, options: ['hour', 'week', 'fortnight', 'month', 'year'], index: true },
 	payDescription: { type: Types.Textarea, collapse: true },
 	imageCaption: { type: String, collapse: true },
 	content: {

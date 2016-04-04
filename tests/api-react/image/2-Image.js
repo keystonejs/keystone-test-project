@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button, Col, Form, FormField, FormInput, FileUpload, Row } from 'elemental';
+import { Button, Col, Form, FormField, FileUpload, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 
@@ -46,10 +45,10 @@ const Test = React.createClass({
 			this.props.result('Received response:', body);
 			this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
 			if (images >= 1) {
-				this.props.assert('image 1 has been uploaded').truthy(() => body.fields.images[0].url.substr(0,25) === 'http://res.cloudinary.com');
+				this.props.assert('image 1 has been uploaded').truthy(() => body.fields.images[0].url.substr(0, 25) === 'http://res.cloudinary.com');
 			}
 			if (images >= 2) {
-				this.props.assert('image 2 has been uploaded').truthy(() => body.fields.images[1].url.substr(0,25) === 'http://res.cloudinary.com');
+				this.props.assert('image 2 has been uploaded').truthy(() => body.fields.images[1].url.substr(0, 25) === 'http://res.cloudinary.com');
 			}
 			this.props.assert('images array contains the right number of items').truthy(() => body.fields.images.length === images);
 			this.props.complete({ gallery: body });
@@ -73,12 +72,12 @@ const Test = React.createClass({
 						<Button ref="run" type="primary" onClick={this.runTest}>Test Images Upload</Button>
 					</Col>
 					<Col sm="1/2" style={{ align: 'right' }}>
-						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
+						<Button ref="next" type="default" onClick={this.props.next} style={{ float: 'right' }}>Next</Button>
 					</Col>
 				</Row>
 			</div>
 		);
-	}
+	},
 });
 
 const localStyles = {

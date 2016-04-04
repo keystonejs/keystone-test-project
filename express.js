@@ -33,12 +33,12 @@ app.use(require('connect-flash')());
 app.use(morgan('tiny'));
 app.use('/keystone', keystone.Admin.Server.createDynamicRouter(keystone));
 
-app.use(function(req, res) {
+app.use(function (req, res) {
 	res.redirect('/keystone');
 });
 
-keystone.openDatabaseConnection(function() {
-	var server = app.listen(process.env.PORT || 3001, function() {
+keystone.openDatabaseConnection(function () {
+	var server = app.listen(process.env.PORT || 3001, function () {
 		console.log('-------------------------------');
 		console.log('Express server ready on port %d', server.address().port);
 		console.log('-------------------------------');

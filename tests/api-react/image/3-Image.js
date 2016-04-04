@@ -1,7 +1,6 @@
 import Domify from 'react-domify';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button, Col, Form, FormField, FormInput, FileUpload, Row } from 'elemental';
+import { Button, Col, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 import styles from '../../../client/lib/styles';
@@ -40,19 +39,13 @@ const Test = React.createClass({
 					<Col sm="1/2">
 						<Button ref="run" type="primary" onClick={this.runTest}>Test Images Update</Button>
 					</Col>
-					{/*<Col sm="1/2" style={{ align: 'right' }}>
+					{/* <Col sm="1/2" style={{ align: 'right' }}>
 						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
 					</Col>*/}
 				</Row>
 			</div>
 		);
-	}
-});
-
-const localStyles = {
-	field: {
-		marginTop: 20,
 	},
-};
+});
 
 module.exports = Test;

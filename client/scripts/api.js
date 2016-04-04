@@ -75,7 +75,7 @@ const App = React.createClass({
 					console.log(e);
 					self.log(styles.fail, '[error] ' + e.name + ': ' + e.message);
 				}
-			}
+			},
 		};
 	},
 	stepComplete (nextStepContext) {
@@ -124,7 +124,7 @@ const App = React.createClass({
 				</Row>
 			</div>
 		);
-	}
+	},
 });
 
 const styles = {

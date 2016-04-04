@@ -16,7 +16,7 @@ User.add({
 });
 
 // Provide access to Keystone
-User.schema.virtual('canAccessKeystone').get(function() {
+User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
 
@@ -26,7 +26,7 @@ User.schema.virtual('canAccessKeystone').get(function() {
  * and breaking access to the website cms.
  */
 
-var protect = function(path) {
+var protect = function (path) {
 	User.schema.path(path).set(value => {
 		return (this.isProtected) ? this.get(path) : value;
 	});

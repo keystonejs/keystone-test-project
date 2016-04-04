@@ -2,7 +2,6 @@ var keystone = require('keystone');
 var lipsum = require('lorem-ipsum');
 var randomkey = require('randomkey');
 var transform = require('model-transform');
-var Types = keystone.Field.Types;
 
 var Autocreate = new keystone.List('Autocreate', {
 	autokey: { from: 'text', path: 'key', unique: true },

@@ -2,8 +2,6 @@ var babelify = require('babelify');
 var browserify = require('browserify-middleware');
 var keystone = require('keystone');
 
-var importRoutes = keystone.importer(__dirname);
-
 var clientConfig = {
 	commonPackages: [
 		'elemental',
@@ -16,7 +14,7 @@ var clientConfig = {
 };
 
 // Setup Route Bindings
-exports = module.exports = function(app) {
+exports = module.exports = function (app) {
 
 	// Bundle common packages
 	app.get('/js/packages.js', browserify(clientConfig.commonPackages, {
@@ -34,7 +32,7 @@ exports = module.exports = function(app) {
 	}));
 
 	// Views
-	app.get('/api', function(req, res) {
+	app.get('/api', function (req, res) {
 		res.render('api', {
 			Keystone: {
 				csrf_header_key: keystone.security.csrf.CSRF_HEADER_KEY,
@@ -44,7 +42,7 @@ exports = module.exports = function(app) {
 	});
 
 	// Views
-	app.use(function(req, res) {
+	app.use(function (req, res) {
 		res.render('index');
 	});
 

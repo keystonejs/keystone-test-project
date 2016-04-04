@@ -1,7 +1,7 @@
 import Domify from 'react-domify';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Col, Form, FormField, FormInput, Row } from 'elemental';
+import { Button, Col, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 import clone from '../../../client/lib/clone';
@@ -14,9 +14,9 @@ const Test = React.createClass({
 			action: 'Start Test',
 			data: {
 				'name.full': 'Test User',
-				email: 'user@keystonejs.com',
-				password: 'test1234',
-				password_confirm: 'test1234',
+				'email': 'user@keystonejs.com',
+				'password': 'test1234',
+				'password_confirm': 'test1234',
 			},
 		};
 	},
@@ -56,12 +56,12 @@ const Test = React.createClass({
 						<Button ref="run" type="primary" onClick={this.runTest}>Test 2 Create User</Button>
 					</Col>
 					<Col sm="1/2" style={{ align: 'right' }}>
-						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
+						<Button ref="next" type="default" onClick={this.props.next} style={{ float: 'right' }}>Next</Button>
 					</Col>
 				</Row>
 			</div>
 		);
-	}
+	},
 });
 
 module.exports = Test;

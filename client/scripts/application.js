@@ -30,7 +30,7 @@ const App = React.createClass({
 				</div>
 			</div>
 		);
-	}
+	},
 });
 
 const styles = {

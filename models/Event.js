@@ -7,13 +7,9 @@ var Event = new keystone.List('Event', {
 	track: true,
 });
 
-var deps = {
-	videoEmbed: { videoEmbed: true, videoEmbedData: { exists: true } },
-};
-
 Event.add({
 	name: { type: String, initial: true, required: true, index: true },
-	eventType: { type: Types.Select, options: [ 'workshop', 'retreat', 'course', 'festival' ], index: true },
+	eventType: { type: Types.Select, options: ['workshop', 'retreat', 'course', 'festival'], index: true },
 	eventState: { type: Types.Select, options: 'new, draft, published, suspended, archived', index: true },
 	startDate: { type: Types.Date, initial: true, required: true },
 	endDate: { type: Types.Date, initial: true },

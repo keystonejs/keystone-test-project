@@ -13,8 +13,8 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', config.nav);
 
 keystone.initExpressApp();
-keystone.openDatabaseConnection(function() {
-	var server = keystone.app.listen(process.env.PORT || 3002, function() {
+keystone.openDatabaseConnection(function () {
+	var server = keystone.app.listen(process.env.PORT || 3002, function () {
 		console.log('-------------------------------');
 		console.log('Keystone server ready on port %d', server.address().port);
 		console.log('-------------------------------');

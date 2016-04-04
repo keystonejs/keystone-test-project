@@ -1,3 +1,5 @@
+/* global Keystone */
+
 import xhr from 'xhr';
 
 const api = {

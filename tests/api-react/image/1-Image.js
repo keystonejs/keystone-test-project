@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button, Col, Form, FormField, FormInput, FileUpload, Radio, Row } from 'elemental';
+import { Button, Col, Form, FormField, FileUpload, Radio, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 
@@ -23,7 +22,7 @@ const Test = React.createClass({
 	},
 	setUploadMode (e) {
 		this.setState({
-			uploadMode: e.target.value
+			uploadMode: e.target.value,
 		});
 	},
 	runTest () {
@@ -80,12 +79,12 @@ const Test = React.createClass({
 						<Button ref="run" type="primary" onClick={this.runTest}>Test Image Upload</Button>
 					</Col>
 					<Col sm="1/2" style={{ align: 'right' }}>
-						<Button ref="next" type="default" onClick={this.props.next} style={{ float: "right" }}>Next</Button>
+						<Button ref="next" type="default" onClick={this.props.next} style={{ float: 'right' }}>Next</Button>
 					</Col>
 				</Row>
 			</div>
 		);
-	}
+	},
 });
 
 const localStyles = {
