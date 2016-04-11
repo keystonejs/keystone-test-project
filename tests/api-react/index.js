@@ -6,4 +6,5 @@ module.exports = [
 	require('./image/1-Image'), // Creates a Gallery and uploads an image
 	require('./image/2-Image'), // Updates the Gallery with multiple images
 	require('./image/3-Image'), // Reorders Gallery images then removes them
+	require('./file/1-File'), // Creates a new File item and uploads a file
 ];
