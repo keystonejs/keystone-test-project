@@ -22,9 +22,9 @@
     "model-transform": "^2.0.0",
     "morgan": "^1.7.0",
     "randomkey": "^1.0.0",
-    "react": "^0.14.8",
-    "react-addons-css-transition-group": "^0.14.8",
-    "react-dom": "^0.14.8",
+    "react": "^15.0.1",
+    "react-addons-css-transition-group": "^15.0.1",
+    "react-dom": "^15.0.1",
     "react-domify": "^0.2.4",
     "store-prototype": "^1.1.1",
     "xhr": "^2.2.0"
@@ -46,6 +46,6 @@
   "devDependencies": {
     "eslint": "^2.6.0",
     "eslint-config-keystone": "^2.1.0",
-    "eslint-plugin-react": "^4.2.3"
+    "eslint-plugin-react": "^5.0.1"
   }
 }
