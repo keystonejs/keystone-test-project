@@ -4,6 +4,7 @@ import { Button, Col, Form, FormField, FileUpload, Radio, Row } from 'elemental'
 import api from '../../../client/lib/api';
 
 const Test = React.createClass({
+	displayName: 'Upload File',
 	getInitialState () {
 		return {
 			file: null,
@@ -51,7 +52,6 @@ const Test = React.createClass({
 	render () {
 		return (
 			<div>
-				<h2 style={{ marginBottom: 0 }}>Upload File</h2>
 				<Form type="horizontal">
 					<FormField label="Radios">
 						<div className="inline-controls">

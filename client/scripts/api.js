@@ -105,6 +105,7 @@ const App = React.createClass({
 				<Row>
 					<Col sm="1/2">
 						<div style={styles.box}>
+							<h2 style={{ marginBottom: 0 }}>{StepComponent.displayName}</h2>
 							<StepComponent
 								assert={this.stepAssert}
 								complete={this.stepComplete}

@@ -8,7 +8,7 @@ import api from '../../../client/lib/api';
 import styles from '../../../client/lib/styles';
 
 const Test = React.createClass({
-	displayName: '3-User',
+	displayName: 'Delete User',
 	getInitialState () {
 		return {
 			deleted: false,
@@ -48,7 +48,6 @@ const Test = React.createClass({
 	render () {
 		return (
 			<div>
-				<h2 style={{ marginBottom: 0 }}>Delete User</h2>
 				<Domify style={styles.data} value={this.state.user} />
 				<hr />
 				<Row>

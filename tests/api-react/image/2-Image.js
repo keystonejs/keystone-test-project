@@ -4,6 +4,7 @@ import { Button, Col, Form, FormField, FileUpload, Row } from 'elemental';
 import api from '../../../client/lib/api';
 
 const Test = React.createClass({
+	displayName: 'Upload Multiple Images',
 	getInitialState () {
 		return {
 			image_one: null,
@@ -57,7 +58,6 @@ const Test = React.createClass({
 	render () {
 		return (
 			<div>
-				<h2 style={{ marginBottom: 0 }}>Upload Multiple Images</h2>
 				<Form type="horizontal">
 					<FormField label="Image" style={localStyles.field}>
 						<FileUpload buttonLabelInitial="Upload Image 1" buttonLabelChange="Change Image 1" name="one" onChange={(e, data) => this.handleFile('one', data)} />

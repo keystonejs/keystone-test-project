@@ -6,6 +6,7 @@ import api from '../../../client/lib/api';
 import styles from '../../../client/lib/styles';
 
 const Test = React.createClass({
+	displayName: 'Manage Images',
 	getInitialState () {
 		var images = [].concat(this.props.stepContext.gallery.fields.images).reverse();
 		return {
@@ -32,7 +33,6 @@ const Test = React.createClass({
 	render () {
 		return (
 			<div>
-				<h2 style={{ marginBottom: 0 }}>Manage Images</h2>
 				<Domify style={styles.data} value={this.state.data} />
 				<hr />
 				<Row>

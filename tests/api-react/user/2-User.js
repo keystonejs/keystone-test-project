@@ -8,7 +8,7 @@ import clone from '../../../client/lib/clone';
 import styles from '../../../client/lib/styles';
 
 const Test = React.createClass({
-	displayName: '2-User',
+	displayName: 'Create User (2)',
 	getInitialState () {
 		return {
 			action: 'Start Test',
@@ -48,7 +48,6 @@ const Test = React.createClass({
 	render () {
 		return (
 			<div>
-				<h2 style={{ marginBottom: 0 }}>Create User</h2>
 				<Domify style={styles.data} value={this.state.data} />
 				<hr />
 				<Row>

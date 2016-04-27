@@ -8,7 +8,7 @@ import api from '../../../client/lib/api';
 import styles from '../../../client/lib/styles';
 
 const Test = React.createClass({
-	displayName: '3-User',
+	displayName: 'Update User',
 	getInitialState () {
 		return {
 			data: {
@@ -44,7 +44,6 @@ const Test = React.createClass({
 	render () {
 		return (
 			<div>
-				<h2 style={{ marginBottom: 0 }}>Update User</h2>
 				<Domify style={styles.data} value={this.state.data} />
 				<hr />
 				<Row>
