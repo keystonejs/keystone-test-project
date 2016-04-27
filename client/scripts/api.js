@@ -1,7 +1,7 @@
 import Domify from 'react-domify';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Col, Row } from 'elemental';
+import { Button, Col, Row } from 'elemental';
 
 import steps from '../../tests/api-react';
 
@@ -35,7 +35,10 @@ const App = React.createClass({
 		return {
 			log: [],
 			step: FIRST_STEP,
+			stepComplete: false,
 			stepContext: getStepContext(FIRST_STEP),
+			stepProgress: 0,
+			stepReady: false,
 		};
 	},
 	log (style, content) {
@@ -47,15 +50,21 @@ const App = React.createClass({
 			log: [{ style, content }].concat(this.state.log),
 		});
 	},
+	runTest () {
+		this.setState({
+			stepReady: false,
+		});
+		this.log(`Step ${this.state.step} running...\n`);
+		this.refs.test.run();
+	},
 	stepReady () {
 		this.setState({
-			log: [],
+			stepProgress: this.state.stepProgress + 1,
+			stepReady: true,
 		}, () => {
 			this.log(`Step ${this.state.step} ready\n`);
+			ReactDOM.findDOMNode(this.refs.run).focus();
 		});
-	},
-	stepRun () {
-		this.log(`Step ${this.state.step} running...\n`);
 	},
 	stepResult () {
 		this.log(`Step ${this.state.step} result:\n`);
@@ -64,7 +73,6 @@ const App = React.createClass({
 		}
 	},
 	stepAssert (msg) {
-		// this.log(`Step ${this.state.step} asserts:\n`);
 		var self = this;
 		return {
 			truthy (fn) {
@@ -79,6 +87,9 @@ const App = React.createClass({
 		};
 	},
 	stepComplete (nextStepContext) {
+		this.setState({
+			stepComplete: true,
+		});
 		const nextStep = this.state.step + 1;
 		setStepContext(nextStep, nextStepContext);
 		this.log(`Step ${this.state.step} complete\n`);
@@ -86,8 +97,10 @@ const App = React.createClass({
 	nextStep () {
 		const nextStep = this.state.step + 1;
 		this.setState({
+			log: [],
 			step: nextStep,
 			stepContext: getStepContext(nextStep),
+			stepProgress: 0,
 		});
 	},
 	renderLog () {
@@ -99,6 +112,9 @@ const App = React.createClass({
 		});
 	},
 	render () {
+		const canRunTest = this.state.stepReady;
+		const canContinue = this.state.stepComplete;
+		const runLabel = this.state.stepProgress > 1 ? 'Continue Test' : 'Run Test';
 		const StepComponent = steps[this.state.step - 1];
 		return (
 			<div style={{ paddingLeft: 20, paddingRight: 20 }}>
@@ -109,12 +125,20 @@ const App = React.createClass({
 							<StepComponent
 								assert={this.stepAssert}
 								complete={this.stepComplete}
-								next={this.nextStep}
 								ready={this.stepReady}
+								ref="test"
 								result={this.stepResult}
-								run={this.stepRun}
 								stepContext={this.state.stepContext}
 							/>
+							<hr />
+							<Row>
+								<Col sm="1/2">
+									<Button ref="run" type="primary" onClick={this.runTest} disabled={!canRunTest}>{runLabel}</Button>
+								</Col>
+								<Col sm="1/2" style={{ align: 'right' }}>
+									<Button ref="next" type="default" onClick={this.nextStep} disabled={!canContinue} style={{ float: 'right' }}>Next</Button>
+								</Col>
+							</Row>
 						</div>
 					</Col>
 					<Col sm="1/2">
