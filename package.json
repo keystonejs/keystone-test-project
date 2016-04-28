@@ -35,10 +35,11 @@
   },
   "scripts": {
     "dev": "KEYSTONE_DEV=true node keystone.js",
-    "dev_windows": "set KEYSTONE_DEV=true&&node keystone.js",
+    "dev:windows": "set KEYSTONE_DEV=true&&node keystone.js",
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "start": "node keystone.js",
+    "start:no-csrf": "DISABLE_CSRF=true node keystone.js",
     "start:iron": "KEYSTONE_DEV=true iron-node keystone.js",
     "test": "npm run lint"
   },
