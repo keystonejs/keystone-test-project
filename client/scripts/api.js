@@ -99,6 +99,7 @@ const App = React.createClass({
 		this.setState({
 			log: [],
 			step: nextStep,
+			stepComplete: false,
 			stepContext: getStepContext(nextStep),
 			stepProgress: 0,
 		});
