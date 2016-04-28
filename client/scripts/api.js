@@ -55,7 +55,7 @@ const App = React.createClass({
 			stepReady: false,
 		});
 		this.log(`Step ${this.state.step} running...\n`);
-		this.refs.test.run();
+		this.refs.test.runTest();
 	},
 	stepReady () {
 		this.setState({

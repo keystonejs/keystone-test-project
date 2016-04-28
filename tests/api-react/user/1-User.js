@@ -20,7 +20,7 @@ const Test = React.createClass({
 	componentDidMount () {
 		this.props.ready();
 	},
-	run () {
+	runTest () {
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
