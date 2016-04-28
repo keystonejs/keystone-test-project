@@ -1,7 +1,5 @@
 import Domify from 'react-domify';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button, Col, Row } from 'elemental';
 
 import api from '../../../client/lib/api';
 import clone from '../../../client/lib/clone';
@@ -22,10 +20,8 @@ const Test = React.createClass({
 	},
 	componentDidMount () {
 		this.props.ready();
-		ReactDOM.findDOMNode(this.refs.run).focus();
 	},
 	runTest () {
-		this.props.run();
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
@@ -38,6 +34,7 @@ const Test = React.createClass({
 						email: 'user-' + Date.now() + '@keystonejs.com',
 					}),
 				});
+				this.props.ready();
 			} else {
 				this.props.assert('status code is 200').truthy(() => res.statusCode === 200);
 				this.props.assert('email returned successfully').truthy(() => body.fields.email === this.state.data.email);
@@ -49,15 +46,6 @@ const Test = React.createClass({
 		return (
 			<div>
 				<Domify style={styles.data} value={this.state.data} />
-				<hr />
-				<Row>
-					<Col sm="1/2">
-						<Button ref="run" type="primary" onClick={this.runTest}>Test 2 Create User</Button>
-					</Col>
-					<Col sm="1/2" style={{ align: 'right' }}>
-						<Button ref="next" type="default" onClick={this.props.next} style={{ float: 'right' }}>Next</Button>
-					</Col>
-				</Row>
 			</div>
 		);
 	},
