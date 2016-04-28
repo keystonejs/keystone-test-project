@@ -41,6 +41,7 @@ const Test = React.createClass({
 				});
 				this.props.ready();
 			} else {
+				this.props.assert('name passed validation').truthy(() => !body.detail.name);
 				this.props.assert('email is required').truthy(() => body.detail.email.type === 'invalid');
 				this.props.assert('passwords don\'t match').truthy(() => body.detail.password.type === 'invalid');
 				this.props.complete();
