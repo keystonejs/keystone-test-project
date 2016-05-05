@@ -39,7 +39,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": "node keystone.js",
-    "start:no-csrf": "DISABLE_CSRF=true node keystone.js",
+    "start:no-csrf": "KEYSTONE_DEV=true DISABLE_CSRF=true node keystone.js",
     "start:iron": "KEYSTONE_DEV=true iron-node keystone.js",
     "test": "npm run lint"
   },
