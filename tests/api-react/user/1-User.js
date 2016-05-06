@@ -1,6 +1,5 @@
 import Domify from 'react-domify';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import api from '../../../client/lib/api';
 import styles from '../../../client/lib/styles';
