@@ -46,25 +46,18 @@ exports.create = {
 			'name.full': 'Vito Belgiorno-Zegna',
 			'email': 'vito@tm.com',
 			'password': 'admin',
-			'company': 't',
-		},
-		{
-			'name.full': 'Lenny Boyatzis',
-			'email': 'lenny@tm.com',
-			'password': 'admin',
-			'company': 't',
+			'company': 'tm',
 		},
 		{
 			'name.full': 'Daniel Cousens',
 			'email': 'dan@btc.com',
 			'password': 'admin',
-			'company': 't',
 		},
 		{
 			'name.full': 'Rob Morris',
 			'email': 'rob@prismatik.com.au',
 			'password': 'admin',
-			'company': 'p',
+			'company': 'pk',
 		},
 		{
 			'name.full': 'John Molomby',
