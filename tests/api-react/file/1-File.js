@@ -27,7 +27,6 @@ const Test = React.createClass({
 		});
 	},
 	runTest () {
-		this.props.run();
 		var formData = new window.FormData();
 		formData.append('name', 'Test ' + Date.now());
 		if (this.state.file && this.state.uploadMode === 'fileData') {
@@ -46,37 +45,27 @@ const Test = React.createClass({
 				this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
 				this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
 				this.props.assert('file is required').truthy(() => body.detail.file.type === 'required');
+				this.props.ready();
 			}
 		});
 	},
 	render () {
 		return (
-			<div>
-				<Form type="horizontal">
-					<FormField label="Radios">
-						<div className="inline-controls">
-							<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
-							{/*
-							<Radio value="localFile" checked={this.state.uploadMode === 'localFile'} onChange={this.setUploadMode} label="Local File" />
-							<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
-							<Radio value="remoteFile" checked={this.state.uploadMode === 'remoteFile'} onChange={this.setUploadMode} label="Remote Image" />
-							*/}
-						</div>
-					</FormField>
-					<FormField label="File" style={localStyles.field}>
-						<FileUpload buttonLabelInitial="Upload File" buttonLabelChange="Change File" onChange={this.handleFile} />
-					</FormField>
-				</Form>
-				<hr />
-				<Row>
-					<Col sm="1/2">
-						<Button ref="run" type="primary" onClick={this.runTest}>Test File Upload</Button>
-					</Col>
-					<Col sm="1/2" style={{ align: 'right' }}>
-						<Button ref="next" type="default" onClick={this.props.next} style={{ float: 'right' }}>Next</Button>
-					</Col>
-				</Row>
-			</div>
+			<Form type="horizontal">
+				<FormField label="Radios">
+					<div className="inline-controls">
+						<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
+						{/*
+						<Radio value="localFile" checked={this.state.uploadMode === 'localFile'} onChange={this.setUploadMode} label="Local File" />
+						<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
+						<Radio value="remoteFile" checked={this.state.uploadMode === 'remoteFile'} onChange={this.setUploadMode} label="Remote Image" />
+						*/}
+					</div>
+				</FormField>
+				<FormField label="File" style={localStyles.field}>
+					<FileUpload buttonLabelInitial="Upload File" buttonLabelChange="Change File" onChange={this.handleFile} />
+				</FormField>
+			</Form>
 		);
 	},
 });

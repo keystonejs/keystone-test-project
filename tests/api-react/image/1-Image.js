@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, FormField, FileUpload, Radio, Row } from 'elemental';
+import { Form, FormField, FileUpload, Radio } from 'elemental';
 
 import api from '../../../client/lib/api';
 
@@ -27,7 +27,6 @@ const Test = React.createClass({
 		});
 	},
 	runTest () {
-		this.props.run();
 		var formData = new window.FormData();
 		formData.append('name', 'Test ' + Date.now());
 		if (this.state.file && this.state.uploadMode === 'fileData') {
@@ -55,34 +54,24 @@ const Test = React.createClass({
 				this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
 				this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
 				this.props.assert('image is required').truthy(() => body.detail.heroImage.type === 'required');
+				this.props.ready();
 			}
 		});
 	},
 	render () {
 		return (
-			<div>
-				<Form type="horizontal">
-					<FormField label="Radios">
-						<div className="inline-controls">
-							<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
-							<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
-							<Radio value="remoteImage" checked={this.state.uploadMode === 'remoteImage'} onChange={this.setUploadMode} label="Remote Image" />
-						</div>
-					</FormField>
-					<FormField label="Image" style={localStyles.field}>
-						<FileUpload buttonLabelInitial="Upload Image" buttonLabelChange="Change Image" onChange={this.handleFile} />
-					</FormField>
-				</Form>
-				<hr />
-				<Row>
-					<Col sm="1/2">
-						<Button ref="run" type="primary" onClick={this.runTest}>Test Image Upload</Button>
-					</Col>
-					<Col sm="1/2" style={{ align: 'right' }}>
-						<Button ref="next" type="default" onClick={this.props.next} style={{ float: 'right' }}>Next</Button>
-					</Col>
-				</Row>
-			</div>
+			<Form type="horizontal">
+				<FormField label="Radios">
+					<div className="inline-controls">
+						<Radio value="fileData" checked={this.state.uploadMode === 'fileData'} onChange={this.setUploadMode} label="File Data" />
+						<Radio value="base64" checked={this.state.uploadMode === 'base64'} onChange={this.setUploadMode} label="Base64" />
+						<Radio value="remoteImage" checked={this.state.uploadMode === 'remoteImage'} onChange={this.setUploadMode} label="Remote Image" />
+					</div>
+				</FormField>
+				<FormField label="Image" style={localStyles.field}>
+					<FileUpload buttonLabelInitial="Upload Image" buttonLabelChange="Change Image" onChange={this.handleFile} />
+				</FormField>
+			</Form>
 		);
 	},
 });
