@@ -4,9 +4,15 @@ var Types = keystone.Field.Types;
 
 var File = new keystone.List('File');
 
+var UploadStore = new keystone.Storage({
+	adapter: keystone.Storage.Adapters.FS,
+	path: 'uploads',
+	publicPath: '/files/uploads/',
+});
+
 File.add({
 	name: { type: String },
-	file: { type: Types.LocalFile, dest: 'uploads', required: true, initial: true },
+	file: { type: Types.File, storage: UploadStore, required: true, initial: true },
 });
 
 transform.toJSON(File);
