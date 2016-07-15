@@ -8,7 +8,7 @@ var storage = new keystone.Storage({
 	adapter: keystone.Storage.Adapters.FS,
 	fs: {
 		path: keystone.expandPath('./uploads'),
-		urlPrefix: '/public/uploads/',
+		publicPath: '/public/uploads/',
 	},
 	schema: {
 		mimetype: false,
