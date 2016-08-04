@@ -24,7 +24,8 @@ const Test = React.createClass({
 		var formData = new window.FormData();
 		formData.append('name', 'Test ' + Date.now());
 		if (this.state.file) {
-			formData.append('file', this.state.file);
+			formData.append('file', 'upload:xyz123');
+			formData.append('xyz123', this.state.file);
 		}
 		api.post('/keystone/api/files/create', {
 			body: formData,
