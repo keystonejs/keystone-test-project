@@ -36,4 +36,8 @@ node_modules
 # Ignore temp/dev update scripts
 updates/0.0.0-*.js
 
+# Ignore built packages
 public/js/packages.js
+
+# Ignore uploaded files
+uploads
