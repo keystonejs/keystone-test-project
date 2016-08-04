@@ -23,6 +23,10 @@ const Test = React.createClass({
 		api.post('/keystone/api/users/create', {
 			json: this.state.data,
 		}, (err, res, body) => {
+			// Unauthorized
+			if (res.statusCode === 401) {
+				window.location.href = '/keystone/signin?from=/api';
+			}
 			this.props.result('Received response:', body);
 			this.props.assert('status code is 400').truthy(() => res.statusCode === 400);
 			this.props.assert('error is "validation errors"').truthy(() => body.error === 'validation errors');
