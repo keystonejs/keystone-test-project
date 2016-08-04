@@ -17,6 +17,7 @@
             "env": {
                 "NODE_ENV": "development",
                 "KEYSTONE_DEV": "true",
+                "DISABLE_CSRF": "true",
             },
             "externalConsole": false,
             "sourceMaps": false,
