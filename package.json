@@ -19,6 +19,8 @@
     "iron-node": "^3.0.5",
     "jade": "^1.11.0",
     "keystone": "https://github.com/keystonejs/keystone.git",
+    "keystone-storage-adapter-azure": "https://github.com/keystonejs/keystone-storage-adapter-azure.git",
+    "keystone-storage-adapter-s3": "https://github.com/keystonejs/keystone-storage-adapter-s3.git",
     "lorem-ipsum": "^1.0.3",
     "model-transform": "^2.0.0",
     "morgan": "^1.7.0",
