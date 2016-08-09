@@ -17,7 +17,7 @@ var storage = new keystone.Storage({
 
 File.add({
 	name: { type: String },
-	file: { type: Types.File, storage: storage, required: true, initial: true },
+	file: { type: Types.File, storage: storage },
 });
 
 // Optional - Test the Azure Storage adapter if environment variables are set
@@ -27,9 +27,10 @@ if (process.env.AZURE_STORAGE_ACCOUNT
 ) {
 	var azureStorage = new keystone.Storage({
 		adapter: require('keystone-storage-adapter-azure'),
-		azure: {}, // Use defaults from .env
+		azure: {
+			generateFilename: keystone.Storage.originalFilename,
+		}, // Use defaults from .env
 		schema: {
-			originalname: true,
 			container: true,
 			etag: true,
 			url: true,
