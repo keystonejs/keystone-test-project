@@ -26,7 +26,7 @@ if (process.env.AZURE_STORAGE_ACCOUNT
 	&& process.env.AZURE_STORAGE_CONTAINER
 ) {
 	var azureStorage = new keystone.Storage({
-		adapter: require('keystone-storage-adapter-s3'),
+		adapter: require('keystone-storage-adapter-azure'),
 		azure: {}, // Use defaults from .env
 		schema: {
 			originalname: true,
@@ -46,7 +46,7 @@ if (process.env.S3_KEY
 	&& process.env.S3_BUCKET
 ) {
 	var s3storage = new keystone.Storage({
-		adapter: require('keystone-storage-adapter-azure'),
+		adapter: require('keystone-storage-adapter-s3'),
 		s3: {}, // Use defaults from .env
 		schema: {
 			originalname: true,
