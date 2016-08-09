@@ -1,12 +1,14 @@
-/**
- * This is an example of creating a custom express app, binding the Admin UI
- * router to it, and using Keystone to intialise the database connection
- */
+require('dotenv').config();
 
 var compression = require('compression');
 var express = require('express');
 var keystone = require('keystone');
 var morgan = require('morgan');
+
+/**
+ * This is an example of creating a custom express app, binding the Admin UI
+ * router to it, and using Keystone to intialise the database connection
+ */
 
 var config = require('./config');
 
