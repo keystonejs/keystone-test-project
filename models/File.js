@@ -50,7 +50,7 @@ if (process.env.S3_KEY
 	var s3storage = new keystone.Storage({
 		adapter: require('keystone-storage-adapter-s3'),
 		s3: {
-			defaultHeaders: {
+			headers: {
 				'x-amz-acl': 'public-read', // files should be publicly accessible
 			},
 			// other options set in .env
