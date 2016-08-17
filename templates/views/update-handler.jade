@@ -1,0 +1,37 @@
+extends ../layouts/default
+
+block content
+	if enquirySubmitted
+		.jumbotron.text-center
+			h1 Success!
+			if user
+				p Head over to the Admin UI to see your enquiry:
+				a(href='/keystone/enquiries').btn.btn-lg.btn-primary Admin UI 
+			else
+				p(style="margin-left: 10vw; margin-right: 10vw;") To see your enquiry, sign in with the username 
+					code demo@keystonejs.com
+					|  and the password 
+					code demo
+					|  then go to the enquiries list.
+				a(href='/keystone/signin').btn.btn-lg.btn-primary Sign In
+	
+	else
+		.page-header
+			a(href='/keystone/enquiries').btn.btn-default.pull-right= user ? 'View Enquiries' : 'Sign in to View Enquiries'
+			h1 Contact
+		.row
+			.col-sm-8
+				form(method='post').form-horizontal
+					input(type='hidden', name='action', value='contact')
+					.form-group(class=validationErrors.name ? 'has-error' : null)
+						label.col-sm-2.text-left.control-label Name
+						.col-sm-10
+							input(type='text' name='name.full' value=formData['name.full'] placeholder="First Last").form-control
+					.form-group(class=validationErrors.email ? 'has-error' : null)
+						label.col-sm-2.control-label Email
+						.col-sm-10
+							input(name='email' value=formData.email placeholder="name@domain.com").form-control
+					.form-group
+						.col-sm-10.col-sm-offset-2
+							p.help-block Note: others can see your enquiry in the <a href='/keystone/enquiries'>Admin UI</a>
+							button(type='submit').btn.btn-primary Submit

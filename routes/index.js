@@ -1,6 +1,7 @@
 var babelify = require('babelify');
 var browserify = require('browserify-middleware');
 var keystone = require('keystone');
+var Enquiry = keystone.list('Enquiry');
 
 var clientConfig = {
 	commonPackages: [
@@ -38,6 +39,37 @@ exports = module.exports = function (app) {
 				csrf_header_key: keystone.security.csrf.CSRF_HEADER_KEY,
 				csrf_token_value: keystone.security.csrf.getToken(req, res),
 			},
+		});
+	});
+
+	app.all('/update-handler', function (req, res) {
+		var view = new keystone.View(req, res);
+
+		res.locals.section = 'contact';
+		res.locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
+		res.locals.formData = req.body || {};
+		res.locals.validationErrors = {};
+		res.locals.enquirySubmitted = false;
+
+		view.on('post', { action: 'update-handler' }, function (next) {
+
+			var application = new Enquiry.model();
+			var updater = application.getUpdateHandler(req);
+
+			updater.process(req.body, {
+				flashErrors: true,
+			}, function (err) {
+				if (err) {
+					res.locals.validationErrors = err.errors || {};
+				} else {
+					res.locals.enquirySubmitted = true;
+				}
+				next();
+			});
+
+		});
+		res.render('update-handler', {
+			section: 'update-handler',
 		});
 	});
 
