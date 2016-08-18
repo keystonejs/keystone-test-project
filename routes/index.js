@@ -50,7 +50,7 @@ exports = module.exports = function (app) {
 		res.locals.validationErrors = {};
 		res.locals.formSubmitted = false;
 
-		view.on('post', { action: 'update-handler' }, function (next) {
+		view.on('post', function (next) {
 
 			var application = new UpdateHandlerTest.model();
 			var updater = application.getUpdateHandler(req);
