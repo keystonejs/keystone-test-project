@@ -1,14 +1,14 @@
 extends ../layouts/default
 
 block content
-	if enquirySubmitted
+	if formSubmitted
 		.jumbotron.text-center
 			h1 Success!
 			if user
-				p Head over to the Admin UI to see your enquiry:
-				a(href='/keystone/enquiries').btn.btn-lg.btn-primary Admin UI 
+				p Head over to the Admin UI to see the result of this form submission:
+				a(href='/keystone/update-handler-test').btn.btn-lg.btn-primary Admin UI 
 			else
-				p(style="margin-left: 10vw; margin-right: 10vw;") To see your enquiry, sign in with the username 
+				p(style="margin-left: 10vw; margin-right: 10vw;") To see your submission, sign in with the username 
 					code demo@keystonejs.com
 					|  and the password 
 					code demo
@@ -17,7 +17,7 @@ block content
 	
 	else
 		.page-header
-			a(href='/keystone/enquiries').btn.btn-default.pull-right= user ? 'View Enquiries' : 'Sign in to View Enquiries'
+			a(href='/keystone/enquiries').btn.btn-default.pull-right= user ? 'View Submissions' : 'Sign in to View Submissions'
 			h1 Contact
 		.row
 			.col-sm-8
@@ -33,5 +33,5 @@ block content
 							input(name='email' value=formData.email placeholder="name@domain.com").form-control
 					.form-group
 						.col-sm-10.col-sm-offset-2
-							p.help-block Note: others can see your enquiry in the <a href='/keystone/enquiries'>Admin UI</a>
+							p.help-block Note: others can see your submission in the <a href='/keystone/update-handler-test'>Admin UI</a>
 							button(type='submit').btn.btn-primary Submit

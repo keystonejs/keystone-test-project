@@ -1,7 +1,7 @@
 var babelify = require('babelify');
 var browserify = require('browserify-middleware');
 var keystone = require('keystone');
-var Enquiry = keystone.list('Enquiry');
+var UpdateHandlerTest = keystone.list('UpdateHandlerTest');
 
 var clientConfig = {
 	commonPackages: [
@@ -46,14 +46,13 @@ exports = module.exports = function (app) {
 		var view = new keystone.View(req, res);
 
 		res.locals.section = 'contact';
-		res.locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
 		res.locals.formData = req.body || {};
 		res.locals.validationErrors = {};
-		res.locals.enquirySubmitted = false;
+		res.locals.formSubmitted = false;
 
 		view.on('post', { action: 'update-handler' }, function (next) {
 
-			var application = new Enquiry.model();
+			var application = new UpdateHandlerTest.model();
 			var updater = application.getUpdateHandler(req);
 
 			updater.process(req.body, {
@@ -62,7 +61,7 @@ exports = module.exports = function (app) {
 				if (err) {
 					res.locals.validationErrors = err.errors || {};
 				} else {
-					res.locals.enquirySubmitted = true;
+					res.locals.formSubmitted = true;
 				}
 				next();
 			});
