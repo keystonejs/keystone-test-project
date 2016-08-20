@@ -47,8 +47,9 @@ if (mandrillApiKey) {
 	new keystone.Email({
 		templateName: template,
 		templateExt: 'pug',
-	}).send({
-		to: to,
+		transport: 'mandrill',
+	}).send({}, {
+		to: [to],
 		from: {
 			name: 'Keystone Test Project',
 			email: 'test@keystonejs.com',
