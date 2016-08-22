@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var keystone = require('keystone');
 var config = require('./config');
 

@@ -28,11 +28,13 @@ const Test = React.createClass({
 		formData.append('name', 'Test Updated ' + Date.now());
 		if (this.state.image_one) {
 			images++;
-			formData.append('images', this.state.image_one.file);
+			formData.append('images', 'upload:image_one');
+			formData.append('image_one', this.state.image_one.file);
 		}
 		if (this.state.image_two) {
 			images++;
-			formData.append('images', this.state.image_two.file);
+			formData.append('images', 'upload:image_two');
+			formData.append('image_two', this.state.image_two.file);
 		}
 		if (!images) {
 			formData.append('images', '');

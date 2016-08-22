@@ -30,7 +30,8 @@ const Test = React.createClass({
 		var formData = new window.FormData();
 		formData.append('name', 'Test ' + Date.now());
 		if (this.state.file && this.state.uploadMode === 'fileData') {
-			formData.append('heroImage', this.state.file);
+			formData.append('heroImage', 'upload:abcd1234');
+			formData.append('abcd1234', this.state.file);
 		} else if (this.state.dataURI && this.state.uploadMode === 'base64') {
 			formData.append('heroImage', this.state.dataURI);
 		} else if (this.state.uploadMode === 'remoteImage') {

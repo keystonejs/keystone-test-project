@@ -41,3 +41,6 @@ public/js/packages.js
 
 # Ignore uploaded files
 uploads
+
+# Ignore private keys + config
+.secrets
