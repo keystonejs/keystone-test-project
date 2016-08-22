@@ -2,7 +2,7 @@
  * Send an email with a test template to an email address
  *
  * Usage:
- * TO=user@keystonejs.com MAILGUN_API_KEY=xyz MAILGUN_DOMAIN=abc TEMPLATE=simple node index
+ * TO=max@thinkmill.com.au MANDRILL_API_KEY=xyz TEMPLATE=simple.pug node index.js
  */
 
 var mailgunApiKey = process.env.MAILGUN_API_KEY;
@@ -25,7 +25,7 @@ if (mailgunApiKey) {
 	keystone.set('mailgun api key', mailgunApiKey);
 	keystone.set('mailgun domain', mailgunDomain);
 
-	new keystone.Email(template).send({
+	new keystone.Email(template).send({}, {
 		to: to,
 		from: {
 			name: 'Keystone Test Project',
