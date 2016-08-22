@@ -9,6 +9,10 @@ Nested.add({
 	things: { type: Types.List, fields: {
 		name: { type: String },
 		number: { type: Number },
+		location: { type: Types.Location },
+		sublist: { type: Types.List, fields: {
+			name: { type: String },
+		} },
 	} },
 });
 

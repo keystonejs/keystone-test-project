@@ -11,9 +11,17 @@ const Test = React.createClass({
 			action: 'Start Test',
 			data: {
 				name: 'Nested ' + Date.now(),
-				nest: [{
+				things: [{
 					name: 'First Item',
 					number: 1,
+					location: {
+						street1: '191 Clarence St',
+						suburb: 'Sydney',
+					},
+					sublist: [
+						{ name: 'Hello' },
+						{ name: 'World' },
+					],
 				}, {
 					name: 'Second Item',
 					number: 2,
