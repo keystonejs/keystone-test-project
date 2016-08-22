@@ -9,14 +9,14 @@ exports.create = {
 		},
 		{
 			'name.full': 'Jed Watson',
-			'email': 'jed@keystonejs.com',
+			'email': 'jed@tm.com',
 			'password': 'admin',
 			'company': 'tm',
 			'isAdmin': true,
 		},
 		{
 			'name.full': 'Joss Mackison',
-			'email': 'joss@keystonejs.com',
+			'email': 'joss@tm.com',
 			'password': 'admin',
 			'company': 'tm',
 			'isAdmin': true,
@@ -44,7 +44,7 @@ exports.create = {
 		},
 		{
 			'name.full': 'Vito Belgiorno-Zegna',
-			'email': 'vito@tm.com',
+			'email': 'vito@bz.com',
 			'password': 'admin',
 			'company': 'tm',
 		},
@@ -61,7 +61,12 @@ exports.create = {
 		},
 		{
 			'name.full': 'John Molomby',
-			'email': 'john@email.com',
+			'email': 'john@tm.com',
+			'password': 'admin',
+		},
+		{
+			'name.full': 'Max Stoiber',
+			'email': 'mxstbr@tm.com',
 			'password': 'admin',
 		},
 	],

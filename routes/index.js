@@ -42,35 +42,7 @@ exports = module.exports = function (app) {
 		});
 	});
 
-	app.all('/update-handler', function (req, res) {
-		var view = new keystone.View(req, res);
-
-		res.locals.section = 'contact';
-		res.locals.formData = req.body || {};
-		res.locals.validationErrors = {};
-		res.locals.formSubmitted = false;
-
-		view.on('post', function (next) {
-
-			var application = new UpdateHandlerTest.model();
-			var updater = application.getUpdateHandler(req);
-
-			updater.process(req.body, {
-				flashErrors: true,
-			}, function (err) {
-				if (err) {
-					res.locals.validationErrors = err.errors || {};
-				} else {
-					res.locals.formSubmitted = true;
-				}
-				next();
-			});
-
-		});
-		res.render('update-handler', {
-			section: 'update-handler',
-		});
-	});
+	app.all('/update-handler', require('./views/update-handler'));
 
 	// Views
 	app.use(function (req, res) {
