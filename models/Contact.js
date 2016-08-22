@@ -2,7 +2,9 @@ var keystone = require('keystone');
 var transform = require('model-transform');
 var Types = keystone.Field.Types;
 
-var Contact = new keystone.List('Contact');
+var Contact = new keystone.List('Contact', {
+	searchUsesTextIndex: true,
+});
 
 Contact.add({
 	name: { type: Types.Name, required: true, index: true },
@@ -18,4 +20,5 @@ Contact.add({
 
 transform.toJSON(Contact);
 Contact.defaultColumns = 'name, email, favouriteFlavour, birthday, homepage';
+Contact.searchFields = 'name, email';
 Contact.register();
