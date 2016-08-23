@@ -12,35 +12,34 @@ html
 
 	body
 		.container(style='margin-top: 30px')
-			h1 Update Handler Test
+			h1 UpdateHandler Test #1
 			// Display flash messages
 			+flash-messages(messages)
-			if formSubmitted
-				// Display success message
-				h2 Success!
-				if user
-					p Head over to the Admin UI to see the result of this form submission:
-					a(href='/keystone/update-handler-test', style='margin-right: 10px').btn.btn-lg.btn-primary Admin UI 
-				else
-					p To see your submission, sign in with the username 
-						code user@keystonejs.com
-						|  and the password 
-						code demo
-					a(href='/keystone/update-handler-test', style='margin-right: 10px').btn.btn-lg.btn-primary Sign In
-				a(href='/update-handler').btn.btn-lg.btn-secondary Submit Again
-			else
-				// Display form
-				form(method='post').form-horizontal
-					input(type='hidden', name='action', value='test-update-handler')
-					.form-group.row(class=validationErrors.name ? 'has-error' : null)
-						label(for='name').col-sm-2.col-form-label Name
-						.col-sm-10
-							input(type='text' name='name' value=formData['name.full'] placeholder='First Last').form-control
-					.form-group.row(class=validationErrors.email ? 'has-error' : null)
-						label(for='email').col-sm-2.col-form-label Email
-						.col-sm-10
-							input(name='email' value=formData.email placeholder='name@domain.com').form-control
-					.form-group.row
-						.col-sm-12
-							button(type='submit').btn.btn-primary Submit
-
+			// Display form
+			form(method='post').form-horizontal
+				input(type='hidden', name='action', value='test-update-handler')
+				.form-group.row(class=validationErrors.name ? 'has-danger' : null)
+					label(for='name.first').col-sm-2.col-form-label First name
+					.col-lg-6
+						input(type='text' name='name.first' value=formData['name.first'] placeholder='Arnold').form-control
+				.form-group.row(class=validationErrors.name ? 'has-danger' : null)
+					label(for='name.last').col-sm-2.col-form-label Last name
+					.col-lg-6
+						input(type='text' name='name.last' value=formData['name.last'] placeholder='Schwarzenegger').form-control
+						if validationErrors.name
+							.form-control-feedback= validationErrors.name.message
+				.form-group.row(class=validationErrors.email ? 'has-danger' : null)
+					label(for='email').col-sm-2.col-form-label Email
+					.col-sm-10
+						input(name='email' value=formData.email placeholder='arnold@schwarzenegger.at').form-control
+						if validationErrors.email
+							.form-control-feedback= validationErrors.email.message
+				.form-group.row
+					.col-sm-12
+						button(type='submit').btn.btn-primary Submit
+	if redirectToNextStage
+		script
+			| console.log('Redirecting...');
+			| setTimeout(function() {
+			| 	window.location.href = '/update-handler'
+			| }, 3000);

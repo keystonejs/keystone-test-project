@@ -1,7 +1,7 @@
 var babelify = require('babelify');
 var browserify = require('browserify-middleware');
 var keystone = require('keystone');
-var UpdateHandlerTest = keystone.list('UpdateHandlerTest');
+var flashMessages = require('./flashMessages');
 
 var clientConfig = {
 	commonPackages: [
@@ -13,6 +13,9 @@ var clientConfig = {
 		'xhr',
 	],
 };
+
+// Middleware
+keystone.pre('render', flashMessages);
 
 // Setup Route Bindings
 exports = module.exports = function (app) {

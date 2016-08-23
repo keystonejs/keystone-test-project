@@ -7,23 +7,26 @@ module.exports = (req, res) => {
 
 	res.locals.formData = req.body || {};
 	res.locals.validationErrors = {};
-	res.locals.formSubmitted = false;
 
 	view.on('post', { action: 'test-update-handler' }, next => {
-
+		// Get the UpdateHandler
 		var application = new UpdateHandlerTest.model();
-
 		application.getUpdateHandler(req).process(req.body, {
+			// Show flash messages for errors
 			flashErrors: true,
+			required: 'name.first, name.last, email',
 		}, function (err) {
 			if (err) {
+				// Show validation errors inline
 				res.locals.validationErrors = err.errors || {};
+				return next();
 			} else {
-				res.locals.formSubmitted = true;
+				// Flash a success message when everything worked out
+				req.flash('success', 'Successfully submitted form! Redirecting to test #2 in 3 seconds...');
+				res.locals.redirectToNextStage = true;
+				return next();
 			}
-			next();
 		});
-
 	});
 
 	view.render('update-handler');
