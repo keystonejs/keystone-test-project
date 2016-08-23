@@ -7,7 +7,8 @@ var UpdateHandlerTest = new keystone.List('UpdateHandlerTest', {
 
 UpdateHandlerTest.add({
 	name: { type: Types.Name, required: true },
-	email: { type: Types.Email, required: true },
+	email: { type: Types.Email },
+	image: { type: Types.CloudinaryImage },
 });
 
 UpdateHandlerTest.track = true;

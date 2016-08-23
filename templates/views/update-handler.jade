@@ -16,7 +16,7 @@ html
 			// Display flash messages
 			+flash-messages(messages)
 			// Display form
-			form(method='post').form-horizontal
+			form(method='post', enctype='multipart/form-data').form-horizontal
 				input(type='hidden', name='action', value='test-update-handler')
 				.form-group.row(class=validationErrors.name ? 'has-danger' : null)
 					label(for='name.first').col-sm-2.col-form-label First name
@@ -34,6 +34,12 @@ html
 						input(name='email' value=formData.email placeholder='arnold@schwarzenegger.at').form-control
 						if validationErrors.email
 							.form-control-feedback= validationErrors.email.message
+				.form-group.row(class=validationErrors.image ? 'has-danger' : null)
+					label(for='image').col-sm-2.col-form-label Image
+					.col-sm-10
+						input(type='file' name='image_upload').form-control
+						if validationErrors.image
+							.form-control-feedback= validationErrors.image.message
 				.form-group.row
 					.col-sm-12
 						button(type='submit').btn.btn-primary Submit

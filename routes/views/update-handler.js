@@ -14,10 +14,26 @@ module.exports = (req, res) => {
 		application.getUpdateHandler(req).process(req.body, {
 			// Show flash messages for errors
 			flashErrors: true,
-			required: 'name.first, name.last, email',
+			// Log database errors
+			logErrors: true,
+			// Save these fields to the model
+			fields: 'name, email, image',
+			// Require all fields to be specified, no matter what it says in the model
+			required: 'name, email, image',
+			// Show custom title in error flash message
+			errorMessage: '[Custom Error Message] There were some errors:',
+			// Show custom required messages
+			requiredMessages: {
+				name: 'Please enter your name',
+			},
+			// Show custom invalid messages
+			invalidMessages: {
+				email: 'Email must be in the format hello@thinkmill.com.au',
+			},
 		}, function (err) {
 			if (err) {
-				// Show validation errors inline
+				// Next to flashing them, also pass the error messages to the Jade template for
+				// inline handling
 				res.locals.validationErrors = err.errors || {};
 				return next();
 			} else {
