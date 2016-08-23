@@ -1,6 +1,7 @@
 var babelify = require('babelify');
 var browserify = require('browserify-middleware');
 var keystone = require('keystone');
+var flashMessages = require('./flashMessages');
 
 var clientConfig = {
 	commonPackages: [
@@ -12,6 +13,9 @@ var clientConfig = {
 		'xhr',
 	],
 };
+
+// Middleware
+keystone.pre('render', flashMessages);
 
 // Setup Route Bindings
 exports = module.exports = function (app) {
@@ -40,6 +44,8 @@ exports = module.exports = function (app) {
 			},
 		});
 	});
+
+	app.all('/update-handler', require('./views/update-handler'));
 
 	// Views
 	app.use(function (req, res) {

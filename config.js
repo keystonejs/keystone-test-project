@@ -21,6 +21,7 @@ exports.options = {
 
 exports.locals = {
 	env: process.NODE_ENV,
+	utils: require('keystone-utils'),
 };
 
 exports.nav = {
