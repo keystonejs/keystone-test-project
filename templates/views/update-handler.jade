@@ -43,9 +43,9 @@ html
 				.form-group.row
 					.col-sm-12
 						button(type='submit').btn.btn-primary Submit
-	if redirectToNextStage
-		script
-			| console.log('Redirecting...');
-			| setTimeout(function() {
-			| 	window.location.href = '/update-handler'
-			| }, 3000);
+			if result
+				a(href='/keystone/update-handler-tests/' + result.id, target='_blank').btn.btn-secondary.m-b-2 View in Keystone
+				pre
+					code= JSON.stringify(result, null, '  ')
+				script.
+					console.log('Result:', !{JSON.stringify(result)});

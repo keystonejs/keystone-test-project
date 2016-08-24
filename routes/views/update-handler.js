@@ -5,7 +5,7 @@ var UpdateHandlerTest = keystone.list('UpdateHandlerTest');
 module.exports = (req, res) => {
 	var view = new keystone.View(req, res);
 
-	res.locals.formData = req.body || {};
+	res.locals.formData = {};
 	res.locals.validationErrors = {};
 
 	view.on('post', { action: 'test-update-handler' }, next => {
@@ -19,7 +19,7 @@ module.exports = (req, res) => {
 			// Save these fields to the model
 			fields: 'name, email, image',
 			// Require all fields to be specified, no matter what it says in the model
-			required: 'name, email, image',
+			required: 'name, email',
 			// Show custom title in error flash message
 			errorMessage: '[Custom Error Message] There were some errors:',
 			// Show custom required messages
@@ -32,14 +32,15 @@ module.exports = (req, res) => {
 			},
 		}, function (err) {
 			if (err) {
-				// Next to flashing them, also pass the error messages to the Jade template for
-				// inline handling
-				res.locals.validationErrors = err.errors || {};
+				// Pass the error messages to the Jade template for inline handling
+				res.locals.validationErrors = err.detail;
+				// Pass req.body as formData to default fields to previously entered values
+				res.locals.formData = req.body;
 				return next();
 			} else {
 				// Flash a success message when everything worked out
-				req.flash('success', 'Successfully submitted form! Redirecting to test #2 in 3 seconds...');
-				res.locals.redirectToNextStage = true;
+				req.flash('success', 'Item saved successfully');
+				res.locals.result = application;
 				return next();
 			}
 		});
