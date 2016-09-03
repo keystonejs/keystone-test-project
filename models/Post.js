@@ -4,6 +4,7 @@ var Types = keystone.Field.Types;
 
 var Post = new keystone.List('Post', {
 	autokey: { path: 'slug', from: 'name', unique: true },
+	track: true,
 });
 
 Post.add({
@@ -14,7 +15,7 @@ Post.add({
 	image: { type: Types.CloudinaryImage },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 },
+		extended: { type: Types.Html, wysiwyg: true, height: 400, collapse: true },
 	},
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true },
 });
