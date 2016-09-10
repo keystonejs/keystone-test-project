@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var transform = require('model-transform');
 var Types = keystone.Field.Types;
 
 var Gallery = new keystone.List('Gallery', {
@@ -12,5 +13,6 @@ Gallery.add({
 	images: { type: Types.CloudinaryImages },
 });
 
+transform.toJSON(Gallery);
 Gallery.track = true;
 Gallery.register();
