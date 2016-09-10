@@ -11,6 +11,7 @@ UpdateHandlerTest.add({
 	name: { type: Types.Name, required: true },
 	email: { type: Types.Email },
 	image: { type: Types.CloudinaryImage },
+	address: { type: Types.Location },
 });
 
 transform.toJSON(UpdateHandlerTest);

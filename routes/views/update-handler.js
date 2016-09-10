@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 			// Log database errors
 			logErrors: true,
 			// Save these fields to the model
-			fields: 'name, email, image',
+			fields: 'name, email, image, address',
 			// Require all fields to be specified, no matter what it says in the model
 			required: 'name, email',
 			// Show custom title in error flash message

@@ -30,19 +30,34 @@ html
 							.form-control-feedback= validationErrors.name.message
 				.form-group.row(class=validationErrors.email ? 'has-danger' : null)
 					label(for='email').col-sm-2.col-form-label Email
-					.col-sm-10
+					.col-lg-6
 						input(name='email' value=formData.email placeholder='arnold@schwarzenegger.at').form-control
 						if validationErrors.email
 							.form-control-feedback= validationErrors.email.message
 				.form-group.row(class=validationErrors.image ? 'has-danger' : null)
 					label(for='image').col-sm-2.col-form-label Image
-					.col-sm-10
+					.col-lg-6
 						input(type='file' name='image_upload').form-control
 						if validationErrors.image
 							.form-control-feedback= validationErrors.image.message
-				.form-group.row
-					.col-sm-12
-						button(type='submit').btn.btn-primary Submit
+				.form-group.row(class=validationErrors.address ? 'has-danger' : null)
+					label(for='street1').col-sm-2.col-form-label Address
+					- var addressData = formData.address || {};
+					.col-sm-6
+						.form-group
+							input(name='address.street1' value=addressData.street1 placeholder='Street').form-control
+						.form-group
+							input(name='address.suburb' value=addressData.suburb placeholder='Suburb').form-control
+					.col-sm-4
+						.form-check
+							label.form-check-label
+								input(type='checkbox' name='address.improve' value='true').form-check-input
+								|  Google Lookup
+					if validationErrors.address
+						.col-lg-6
+							.form-control-feedback= validationErrors.address.message
+				.form-group
+					button(type='submit').btn.btn-primary Submit
 			if result
 				a(href='/keystone/update-handler-tests/' + result.id, target='_blank').btn.btn-secondary.m-b-2 View in Keystone
 				pre
