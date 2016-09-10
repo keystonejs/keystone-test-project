@@ -42,16 +42,15 @@ html
 							.form-control-feedback= validationErrors.image.message
 				.form-group.row(class=validationErrors.address ? 'has-danger' : null)
 					label(for='street1').col-sm-2.col-form-label Address
-					- var addressData = formData.address || {};
 					.col-sm-6
 						.form-group
-							input(name='address.street1' value=addressData.street1 placeholder='Street').form-control
+							input(name='address.street1' value=formData['address.street1'] placeholder='Street').form-control
 						.form-group
-							input(name='address.suburb' value=addressData.suburb placeholder='Suburb').form-control
+							input(name='address.suburb' value=formData['address.suburb'] placeholder='Suburb').form-control
 					.col-sm-4
 						.form-check
 							label.form-check-label
-								input(type='checkbox' name='address.improve' value='true').form-check-input
+								input(type='checkbox' name='address_improve' value='true' checked).form-check-input
 								|  Google Lookup
 					if validationErrors.address
 						.col-lg-6
