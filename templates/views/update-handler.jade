@@ -6,7 +6,7 @@ html
 		meta(charset='utf-8')
 		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
 		meta(http-equiv='x-ua-compatible', content='ie=edge')
-		title= title || 'Keystone UpdateHandler Test'
+		title Keystone UpdateHandler Test
 		link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
 		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css', integrity='2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj', crossorigin='anonymous')
 
@@ -21,36 +21,36 @@ html
 				.form-group.row(class=validationErrors.name ? 'has-danger' : null)
 					label(for='name.first').col-sm-2.col-form-label First name
 					.col-lg-6
-						input(type='text' name='name.first' value=formData['name.first'] placeholder='Arnold').form-control
+						input(type='text', name='name.first', value=formData['name.first'], placeholder='Arnold').form-control
 				.form-group.row(class=validationErrors.name ? 'has-danger' : null)
 					label(for='name.last').col-sm-2.col-form-label Last name
 					.col-lg-6
-						input(type='text' name='name.last' value=formData['name.last'] placeholder='Schwarzenegger').form-control
+						input(type='text', name='name.last', value=formData['name.last'], placeholder='Schwarzenegger').form-control
 						if validationErrors.name
 							.form-control-feedback= validationErrors.name.message
 				.form-group.row(class=validationErrors.email ? 'has-danger' : null)
 					label(for='email').col-sm-2.col-form-label Email
 					.col-lg-6
-						input(name='email' value=formData.email placeholder='arnold@schwarzenegger.at').form-control
+						input(name='email', value=formData.email, placeholder='arnold@schwarzenegger.at').form-control
 						if validationErrors.email
 							.form-control-feedback= validationErrors.email.message
 				.form-group.row(class=validationErrors.image ? 'has-danger' : null)
 					label(for='image').col-sm-2.col-form-label Image
 					.col-lg-6
-						input(type='file' name='image_upload').form-control
+						input(type='file', name='image_upload').form-control
 						if validationErrors.image
 							.form-control-feedback= validationErrors.image.message
 				.form-group.row(class=validationErrors.address ? 'has-danger' : null)
 					label(for='street1').col-sm-2.col-form-label Address
 					.col-sm-6
 						.form-group
-							input(name='address.street1' value=formData['address.street1'] placeholder='Street').form-control
+							input(name='address.street1', value=formData['address.street1'], placeholder='Street').form-control
 						.form-group
-							input(name='address.suburb' value=formData['address.suburb'] placeholder='Suburb').form-control
+							input(name='address.suburb', value=formData['address.suburb'], placeholder='Suburb').form-control
 					.col-sm-4
 						.form-check
 							label.form-check-label
-								input(type='checkbox' name='address_improve' value='true' checked).form-check-input
+								input(type='checkbox', name='address_improve', value='true', checked).form-check-input
 								|  Google Lookup
 					if validationErrors.address
 						.col-lg-6

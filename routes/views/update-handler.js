@@ -7,6 +7,7 @@ module.exports = (req, res) => {
 
 	res.locals.formData = {};
 	res.locals.validationErrors = {};
+	res.locals.result = false;
 
 	view.on('post', { action: 'test-update-handler' }, next => {
 		// Get the UpdateHandler
