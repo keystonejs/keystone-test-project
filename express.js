@@ -20,7 +20,7 @@ keystone.set('locals', config.locals);
 keystone.set('routes', require('./routes'));
 keystone.set('nav', config.nav);
 
-keystone.initDatabase();
+keystone.initDatabaseConfig();
 keystone.initExpressSession();
 
 app.use(compression());
