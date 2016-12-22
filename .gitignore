@@ -44,3 +44,4 @@ uploads
 
 # Ignore private keys + config
 .secrets
+keystone/
