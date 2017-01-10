@@ -16,6 +16,7 @@
     "dotenv": "^2.0.0",
     "elemental": "^0.5.14",
     "express": "^4.13.4",
+    "helmet": "^3.1.0",
     "jade": "^1.11.0",
     "keystone": "https://github.com/keystonejs/keystone.git",
     "keystone-storage-adapter-azure": "^1.1.0",

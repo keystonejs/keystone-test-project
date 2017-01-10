@@ -1,5 +1,6 @@
 var babelify = require('babelify');
 var browserify = require('browserify-middleware');
+var helmet = require('helmet');
 var keystone = require('keystone');
 var flashMessages = require('./flashMessages');
 
@@ -15,6 +16,18 @@ var clientConfig = {
 };
 
 // Middleware
+
+keystone.pre('static', helmet({
+	contentSecurityPolicy: {
+		directives: {
+			defaultSrc: ["'self'"],
+			imgSrc: ["'self'", 'data:', 'res.cloudinary.com'], // ['*'],
+			scriptSrc: ["'self'", "'unsafe-inline'", 'www.google-analytics.com'],
+			styleSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com'],
+		},
+	},
+}));
+
 keystone.pre('render', flashMessages);
 
 // Setup Route Bindings
