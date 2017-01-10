@@ -42,5 +42,8 @@ public/js/packages.js
 # Ignore uploaded files
 uploads
 
+# Ignore yarn lock
+yarn.lock
+
 # Ignore private keys + config
 .secrets
