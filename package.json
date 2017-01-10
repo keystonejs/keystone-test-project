@@ -16,7 +16,6 @@
     "dotenv": "^2.0.0",
     "elemental": "^0.5.14",
     "express": "^4.13.4",
-    "iron-node": "^3.0.5",
     "jade": "^1.11.0",
     "keystone": "https://github.com/keystonejs/keystone.git",
     "keystone-storage-adapter-azure": "^1.1.0",
@@ -45,7 +44,6 @@
     "lint:fix": "eslint . --fix",
     "start": "node keystone.js",
     "start:no-csrf": "KEYSTONE_DEV=true DISABLE_CSRF=true node keystone.js",
-    "start:iron": "KEYSTONE_DEV=true iron-node keystone.js",
     "test": "npm run lint"
   },
   "main": "keystone.js",
