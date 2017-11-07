@@ -10,9 +10,13 @@ User.add({
 	password: { type: Types.Password, initial: true, required: true },
 	company: { type: Types.Relationship, ref: 'Company', initial: true, index: true },
 	address: { type: Types.Location, collapse: true },
+
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	isProtected: { type: Boolean, noedit: true },
+	isContributor: { type: Boolean, label: 'Create & Edit own content', index: true },
+	isAuthor: { type: Boolean, label: 'Create, Edit & Publish own content', index: true },
+	isEditor: { type: Boolean, label: 'Create, Edit & Publish any content', index: true },
 });
 
 // Provide access to Keystone
