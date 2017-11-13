@@ -10,10 +10,12 @@ revisions: {
 		excludeFields: // Fields to exclude from revision compare
 	},
 
-workflow: {
-	enabled: false // can be disabled 
+publishing: {
+	enabled: false // can be disabled
 	stateField: 'state', // field to track content state
 	selfApproval: true, // Allows users to self approval to change state
+	approvalStates: ['draft', 'published', 'archived', 'deleted'],
+	unpublishStates: 'archived' // default state for unpublished content
 },
 
 With workflow enabled User.permissions fields need to be added to enable users:
@@ -25,33 +27,30 @@ var Post = new keystone.List('Post', {
 	autokey: { path: 'slug', from: 'name', unique: true },
 	track: true,
 	history: true,
-	workflow: {
+	publishing: {
 		enabled: true,
 		stateField: 'state',
 		selfApproval: true,
-		approvalStates: ['published', 'archived', 'deleted', 'schedulePublished', 'scheduleArchived'],
+		approvalStates: ['draft', 'published', 'archived', 'deleted'],
+		// State options for unpublished content
+		unpublishStates: ['draft','archived'],
+		// States that allow content to be visible by the public
+		publishedStates: ['published']
 	},
 	revisions: {
 		enabled: true,
-		excludeFields: ['workflow', 'publishDate', 'updatedBy', 'updatedAt'],
+		excludeFields: ['publishing', 'publishDate', 'updatedBy', 'updatedAt'],
 	},
 });
 
 Post.add({
 	name: { type: String, required: true },
-	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
+	state: { type: Types.Select, options: 'draft, published, archived, deleted', default: 'draft', index: true, noedit: true },
 	author: { type: Types.Relationship, ref: 'User', index: true },
-	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-	publishDate: { type: Types.Date, index: true },
 	image: { type: Types.CloudinaryImage },
 	content: {
 		brief: { type: Types.Html, wysiwyg: true, height: 150 },
 		extended: { type: Types.Html, wysiwyg: true, height: 400, collapse: true },
-	},
-	workflow: {
-		archiveDate: { type: Types.Date, index: true, noedit: true },
-		publishDate: { type: Types.Date, index: true, noedit: true },
-		approvalPending: { type: Boolean, noedit: true },
 	},
 	categories: { type: Types.Relationship, ref: 'PostCategory', many: true },
 });
@@ -63,5 +62,5 @@ Post.schema.virtual('content.full').get(() => {
 });
 
 transform.toJSON(Post);
-Post.defaultColumns = 'name,  author|20%, categories|20%, publishedDate|20%';
+Post.defaultColumns = 'name,  author|20%, categories|20%, publishedDate|20%, state|10%, publishing.requestApproval|10%, publishing.approvalPendingMessage|20%';
 Post.register();
