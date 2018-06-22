@@ -21,6 +21,7 @@ Post.add({
 });
 
 Post.schema.virtual('content.full').get(() => {
+	if (!this.content) return '';
 	return this.content.extended || this.content.brief;
 });
 
