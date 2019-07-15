@@ -45,7 +45,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "start": "node keystone.js",
-    "start:no-csrf": "KEYSTONE_DEV=true DISABLE_CSRF=true node keystone.js",
+    "start:linked": "node --preserve-symlinks keystone",
+    "start:dev": "KEYSTONE_DEV=true DISABLE_CSRF=true node --preserve-symlinks keystone.js",
     "test": "npm run lint"
   },
   "main": "keystone.js",
