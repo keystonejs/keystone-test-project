@@ -12,6 +12,7 @@ User.add({
 	address: { type: Types.Location, collapse: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
+	isEditor: { type: Boolean, label: 'Can manage all posts and update their state', index: true },
 	isProtected: { type: Boolean, noedit: true },
 });
 
@@ -22,20 +23,22 @@ User.schema.virtual('canAccessKeystone').get(function () {
 
 /**
  * PROTECTING THE DEMO USER
- * The following hooks prevent anyone from editing the main demo user itself,
- * and breaking access to the website cms.
+ *
+ * Keystone's dynamic list options are used here to protect the demo user
+ * from being deleted or having the login details changed
  */
 
-var protect = function (path) {
-	User.schema.path(path).set(value => {
-		return (this.isProtected) ? this.get(path) : value;
-	});
-};
-var protectedPaths = ['name.first', 'name.last', 'email', 'isAdmin'];
-protectedPaths.forEach(protect);
+User.itemOptions = (item, user) => ({
+	// protected users cannot be deleted, and users cannot delete themselves
+	nodelete: item.isProtected || user && user.id === item.id,
+});
 
-User.schema.path('password').set(value => {
-	return (this.isProtected) ? '$2a$10$8oUbHJPIUrW5z2aHoIGfP.q0SC5DrLDrX1qLkwhjQ3nYQ9Ay2nGPu' : value;
+User.itemFieldOptions = (item, user) => ({
+	// protected users have the following fields set to noedit:
+	name: { noedit: item.isProtected },
+	email: { noedit: item.isProtected },
+	password: { noedit: item.isProtected },
+	isAdmin: { noedit: item.isProtected },
 });
 
 transform.toJSON(User);
